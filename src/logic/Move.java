@@ -9,6 +9,12 @@ import java.util.List;
  */
 public class Move {
 	
+	public interface Callback {
+		public void call();
+	}
+	
+	private Callback cb;
+	
 	/**
 	 * Az effektek.
 	 */
@@ -23,9 +29,10 @@ public class Move {
 	 * Konstruktor
 	 * @param indicator mező.
 	 */
-	public Move(Field indicator) {
+	public Move(Field indicator, Callback cb) {
 		this.effects = new ArrayList<Effect>();
 		this.indicator = indicator;
+		this.cb = cb;
 	}
 	
 	/**
@@ -46,6 +53,7 @@ public class Move {
 	public void execute() {
 		for(Effect e : this.effects)
 			e.run();
+		this.cb.call();
 	}
 	
 	/**

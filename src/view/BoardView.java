@@ -122,6 +122,7 @@ public class BoardView extends JPanel {
 			Field indicator = m.getIndicator();
 			this.fieldViews[indicator.getYCoord()][indicator.getXCoord()].setMove(m);
 		}
+		this.repaint();
 	}
 	
 	/**
@@ -132,6 +133,7 @@ public class BoardView extends JPanel {
 		for(int i = 0; i < 8; ++i)
 			for(int j = 0; j < 8; ++j)
 				this.fieldViews[i][j].setMove(null);
+		this.repaint();
 	}
 	
 	class OnKeyPress implements KeyListener {

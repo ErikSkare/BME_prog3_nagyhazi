@@ -60,7 +60,6 @@ public class FieldView extends JPanel {
 	 */
 	public final void setMove(Move m) { 
 		this.move = m; 
-		this.repaint();
 	}
 	
 	/**

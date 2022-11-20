@@ -3,7 +3,11 @@ package logic;
 import java.util.LinkedList;
 import java.util.List;
 
+import logic.pieces.Bishop;
+import logic.pieces.Knight;
 import logic.pieces.Pawn;
+import logic.pieces.Queen;
+import logic.pieces.Rook;
 
 /**
  * @author Skáre Erik
@@ -42,10 +46,29 @@ public class Board {
 		for(int i = 0; i < 8; ++i)
 			for(int j = 0; j < 8; ++j)
 				this.fields[i][j] = new Field(this, i, j, (i + j) % 2 == 0);
+		// Pawns
 		for(int i = 0; i < 8; ++i) {
 			this.fields[1][i].stepOn(new Pawn(this.fields[1][i], false, 1, whiteCapturedPool));
 			this.fields[6][i].stepOn(new Pawn(this.fields[6][i], true, 1, blackCapturedPool));
 		}
+		// Rooks
+		this.fields[0][0].stepOn(new Rook(this.fields[0][0], false, 5, whiteCapturedPool));
+		this.fields[0][7].stepOn(new Rook(this.fields[0][7], false, 5, whiteCapturedPool));
+		this.fields[7][0].stepOn(new Rook(this.fields[7][0], true, 5, blackCapturedPool));
+		this.fields[7][7].stepOn(new Rook(this.fields[7][7], true, 5, blackCapturedPool));
+		//Bishops
+		this.fields[0][2].stepOn(new Bishop(this.fields[0][2], false, 3, whiteCapturedPool));
+		this.fields[0][2].stepOn(new Bishop(this.fields[0][5], false, 3, whiteCapturedPool));
+		this.fields[7][2].stepOn(new Bishop(this.fields[7][2], true, 3, blackCapturedPool));
+		this.fields[7][5].stepOn(new Bishop(this.fields[7][5], true, 3, blackCapturedPool));
+		//Queens
+		this.fields[0][3].stepOn(new Queen(this.fields[7][3], false, 9, whiteCapturedPool));
+		this.fields[7][3].stepOn(new Queen(this.fields[0][3], true, 9, blackCapturedPool));
+		//Knights
+		this.fields[0][1].stepOn(new Knight(this.fields[0][1], false, 3, whiteCapturedPool));
+		this.fields[0][6].stepOn(new Knight(this.fields[0][6], false, 3, whiteCapturedPool));
+		this.fields[7][1].stepOn(new Knight(this.fields[7][1], true, 3, blackCapturedPool));
+		this.fields[7][6].stepOn(new Knight(this.fields[7][6], true, 3, blackCapturedPool));
 	}
 	
 	/**
