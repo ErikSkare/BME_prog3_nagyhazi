@@ -3,6 +3,8 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 
+import logic.Board.State;
+
 /**
  * @author Skáre Erik
  * Egy partit reprezentál.
@@ -24,6 +26,8 @@ public class Party {
 	 */
 	private Board board;
 	
+	private Board.State partyState;
+	
 	/**
 	 * A lista, ahova a világos által leütött bábuk kerülnek.
 	 */
@@ -41,6 +45,7 @@ public class Party {
 	public Party(Player white, Player black) {
 		this.white = white;
 		this.black = black;
+		this.partyState = State.ONGOING;
 		this.whiteCapturedPool = new ArrayList<Piece>();
 		this.blackCapturedPool = new ArrayList<Piece>();
 		this.board = new Board(whiteCapturedPool, blackCapturedPool);
@@ -82,12 +87,19 @@ public class Party {
 	public final Board getBoard() { return this.board; }
 	
 	/**
+	 * @return A 'partyState' attribútum értéke.
+	 */
+	public final Board.State getPartyState() { return this.partyState; }
+	
+	/**
 	 * Visszaadja a lépési jogát valaki.
 	 * @param by a visszaadó játékos.
 	 */
 	public void returnStepPermission(Player by) {
 		boolean isWhiteNext = (by == this.black);
-		if(this.board.getCurrentState(isWhiteNext) != Board.State.ONGOING)
+		Board.State state = this.board.getCurrentState(isWhiteNext);
+		this.partyState = state;
+		if(state != Board.State.ONGOING)
 			return;
 		if(isWhiteNext)
 			this.white.grantStepPermission();

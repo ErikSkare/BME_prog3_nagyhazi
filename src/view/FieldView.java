@@ -106,6 +106,8 @@ public class FieldView extends JPanel {
 					boardView.getActivePiece().makeMove(move);
 					boardView.getMovingPlayer().resignStepPermission();
 					boardView.setPastMovesIt(boardView.getBoard().getPastMoves().listIterator());
+					PartyView pv = boardView.getPartyView();
+					pv.getStateText().setText(pv.getParty().getPartyState().toString());
 				}
 				boardView.clearAvailableMoves();
 			}

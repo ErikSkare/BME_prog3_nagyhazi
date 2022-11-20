@@ -14,7 +14,7 @@ public class Board {
 	/**
 	 * Az állás lehetséges állapotai.
 	 */
-	enum State {
+	public enum State {
 		ONGOING,
 		DRAW,
 		WHITE_VICTORY,

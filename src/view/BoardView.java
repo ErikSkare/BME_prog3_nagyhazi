@@ -108,6 +108,8 @@ public class BoardView extends JPanel {
 	 */
 	public final Piece getActivePiece() { return this.activePiece; }
 	
+	public final PartyView getPartyView() { return this.partyView; }
+	
 	/**
 	 * Megjeleníti az aktuális lépéseket.
 	 * @param p		a bábu, aki lép.
