@@ -31,7 +31,7 @@ public class FieldView extends JPanel {
 	/**
 	 * A partihoz tartozó nézet.
 	 */
-	private PartyView partyView;
+	private BoardView boardView;
 	
 	/**
 	 * Az aktuális lépés, ami a mezőhöz tartozik.
@@ -42,10 +42,10 @@ public class FieldView extends JPanel {
 	 * @param field		a mező.
 	 * @param partyView	a nézet.
 	 */
-	public FieldView(Field field, PartyView partyView) {
+	public FieldView(Field field, BoardView boardView) {
 		super();
 		this.field = field;
-		this.partyView = partyView;
+		this.boardView = boardView;
 		
 		this.addMouseListener(new OnClickAction());
 	}
@@ -93,18 +93,18 @@ public class FieldView extends JPanel {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			if(partyView.getState() == PartyView.State.THINKING) {
+			if(boardView.getState() == BoardView.State.THINKING) {
 				if(field.getPiece() == null) 
 					return;
-				if(partyView.getParty().getWhite().hasStepPermission() != field.getPiece().getIsWhite())
+				if(boardView.getMovingPlayer().getPlaying().getWhite().hasStepPermission() != field.getPiece().getIsWhite())
 					return;
-				partyView.addAvailableMoves(field.getPiece(), field.getPiece().getAvailableMoves());
+				boardView.addAvailableMoves(field.getPiece(), field.getPiece().getAvailableMoves());
 			} else {
 				if(isMoveable()) {
-					partyView.getActivePiece().makeMove(move);
-					partyView.getParty().getCurrentPlayer().resignStepPermission();
+					boardView.getActivePiece().makeMove(move);
+					boardView.getMovingPlayer().resignStepPermission();
 				}
-				partyView.clearAvailableMoves();
+				boardView.clearAvailableMoves();
 			}
 		}
 
