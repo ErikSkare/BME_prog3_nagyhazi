@@ -93,6 +93,8 @@ public class FieldView extends JPanel {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
+			if(boardView.getMovingPlayer() == null)
+				return;
 			if(boardView.getState() == BoardView.State.THINKING) {
 				if(field.getPiece() == null) 
 					return;

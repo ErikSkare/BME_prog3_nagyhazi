@@ -58,10 +58,15 @@ public class Party {
 	public final Player getBlack() { return this.black; }
 	
 	/**
-	 * @return Az aktuálisan lépő játékos.
+	 * @return Az aktuálisan lépő játékos, vagy null ha nincs.
 	 */
 	public final Player getCurrentPlayer() {
-		return white.hasStepPermission() ? white : black;
+		if(!white.hasStepPermission() && !black.hasStepPermission())
+			return null;
+		if(getIsWhiteCurrent())
+			return white;
+		else
+			return black;
 	}
 	
 	/**
