@@ -1,0 +1,86 @@
+package logic;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author Skáre Erik
+ * Egy partit reprezentál.
+ */
+public class Party {
+	
+	/**
+	 * A világossal játszó játékos.
+	 */
+	private Player white;
+	
+	/**
+	 * A sötéttel játszó játékos.
+	 */
+	private Player black;
+	
+	/**
+	 * A tábla, amin a játék zajlik.
+	 */
+	private Board board;
+	
+	/**
+	 * A lista, ahova a világos által leütött bábuk kerülnek.
+	 */
+	private List<Piece> whiteCapturedPool;
+	
+	/**
+	 * A lista, ahova a sötét által leütött bábuk kerülnek.
+	 */
+	private List<Piece> blackCapturedPool;
+	
+	/**
+	 * @param white világos.
+	 * @param black sötét.
+	 */
+	public Party(Player white, Player black) {
+		this.white = white;
+		this.black = black;
+		this.whiteCapturedPool = new ArrayList<Piece>();
+		this.blackCapturedPool = new ArrayList<Piece>();
+		this.board = new Board(whiteCapturedPool, blackCapturedPool);
+		white.grantStepPermission();
+	}
+	
+	/**
+	 * @return A 'white' attribútum értéke.
+	 */
+	public final Player getWhite() { return this.white; }
+	
+	/**
+	 * @return A 'black' attribútum értéke.
+	 */
+	public final Player getBlack() { return this.black; }
+	
+	/**
+	 * @return Fehér-e a következő.
+	 */
+	public final Player getCurrentPlayer() {
+		return white.hasStepPermission() ? white : black;
+	}
+	
+	/**
+	 * @return A 'board' attribútum értéke.
+	 */
+	public final Board getBoard() { return this.board; }
+	
+	/**
+	 * Visszaadja a lépési jogát valaki.
+	 * @param by a visszaadó játékos.
+	 */
+	public void returnStepPermission(Player by) {
+		boolean isWhiteNext = (by == this.black);
+		if(this.board.getCurrentState(isWhiteNext) != Board.State.ONGOING)
+			return;
+		if(isWhiteNext)
+			this.white.grantStepPermission();
+		else
+			this.black.grantStepPermission();
+	}
+	
+}
