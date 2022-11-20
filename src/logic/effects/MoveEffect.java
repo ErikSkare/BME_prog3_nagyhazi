@@ -1,5 +1,8 @@
 package logic.effects;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import logic.Effect;
 import logic.Field;
 import logic.Piece;
@@ -20,6 +23,8 @@ public class MoveEffect extends Effect {
 	 */
 	private Field to;
 	
+	private Piece capturing;
+	
 	/**
 	 * Konstruktor
 	 * @param piece bábu.
@@ -29,6 +34,7 @@ public class MoveEffect extends Effect {
 		super(piece);
 		this.from = piece.getField();
 		this.to = to;
+		this.capturing = this.to.getPiece();
 	}
 	
 	/**
@@ -41,10 +47,14 @@ public class MoveEffect extends Effect {
 		this.getPiece().getField().stepOff();
 		this.getTo().stepOn(this.getPiece());
 	}
-
+	
 	@Override
-	public Effect reverse() {
-		return new MoveEffect(this.getPiece(), this.from);
+	public List<Effect> reverse() {
+		List<Effect> result = new ArrayList<Effect>();
+		result.add(new MoveEffect(this.getPiece(), from));
+		if(this.capturing != null)
+			result.add(new AddEffect(this.capturing, to));
+		return result;
 	}
 
 }

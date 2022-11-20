@@ -53,7 +53,7 @@ public class Move {
 	 */
 	public void executeReverse() {
 		for(int i = this.effects.size() - 1; i >= 0; --i)
-			this.effects.get(i).reverse().run();
+			for(Effect e : this.effects.get(i).reverse())
+				e.run();
 	}
-	
 }

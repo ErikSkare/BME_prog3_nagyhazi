@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.List;
+
 /**
  * @author Skáre Erik
  * Csinál valamit a táblán egy bábuval.
@@ -27,7 +29,7 @@ abstract public class Effect {
 	/**
 	 * @return Visszaadja az effekt megfordítását.
 	 */
-	abstract public Effect reverse();
+	abstract public List<Effect> reverse();
 	
 	/**
 	 * @return A bábu.
