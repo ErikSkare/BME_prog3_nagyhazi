@@ -25,6 +25,11 @@ abstract public class Effect {
 	abstract public void run();
 	
 	/**
+	 * @return Visszaadja az effekt megfordítását.
+	 */
+	abstract public Effect reverse();
+	
+	/**
 	 * @return A bábu.
 	 */
 	public final Piece getPiece() { return this.piece; }

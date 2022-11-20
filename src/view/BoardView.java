@@ -1,7 +1,10 @@
 package view;
 
 import java.awt.GridLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.List;
+import java.util.ListIterator;
 
 import javax.swing.JPanel;
 
@@ -23,6 +26,7 @@ public class BoardView extends JPanel {
 	 * A megjelenítés állapota.
 	 */
 	enum State {
+		HISTORY,  // múltbeli állást néz a játékos.
 		THINKING, // nincsenek megjelenítve lehetséges lépések.
 		MOVING	  // a lehetséges lépések meg vannak jelenítve.
 	}
@@ -36,6 +40,8 @@ public class BoardView extends JPanel {
 	 * A tábla, amit megjelenít.
 	 */
 	private Board board;
+	
+	private ListIterator<Move> pastMovesIt;
 	
 	/**
 	 * A mezőkhöz tartozó nézetek.
@@ -60,8 +66,12 @@ public class BoardView extends JPanel {
 		super(new GridLayout(0, 8));
 		this.state = State.THINKING;
 		this.board = board;
+		this.pastMovesIt = board.getPastMoves().listIterator();
 		this.partyView = partyView;
 		this.activePiece = null;
+		
+		this.setFocusable(true);
+		this.addKeyListener(new OnKeyPress());
 		
 		this.fieldViews = new FieldView[8][8];
 		for(int i = 0; i < 8; ++i) {
@@ -76,6 +86,12 @@ public class BoardView extends JPanel {
 	 * @return A tábla, amit megjelenít.
 	 */
 	public final Board getBoard() { return this.board; }
+	
+	/**
+	 * Beállítja a múltbeli lépések iterátorát.
+	 * @param it az iterátor.
+	 */
+	public final void setPastMovesIt(ListIterator<Move> it) { this.pastMovesIt = it; }
 	
 	/**
 	 * @return Az éppen lépő játékos.
@@ -114,6 +130,34 @@ public class BoardView extends JPanel {
 		for(int i = 0; i < 8; ++i)
 			for(int j = 0; j < 8; ++j)
 				this.fieldViews[i][j].setMove(null);
+	}
+	
+	class OnKeyPress implements KeyListener {
+
+		@Override
+		public void keyTyped(KeyEvent e) { }
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if(state == State.MOVING)
+				return;
+			if(e.getKeyCode() == 37 && pastMovesIt.hasNext()) {
+				state = State.HISTORY;
+				Move m = pastMovesIt.next();
+				m.executeReverse();
+				repaint();
+			} else if(e.getKeyCode() == 39 && pastMovesIt.hasPrevious()) {
+				Move m = pastMovesIt.previous();
+				m.execute();
+				repaint();
+			}
+			if(!pastMovesIt.hasPrevious())
+				state = State.THINKING;
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) { }
+		
 	}
 	
 }

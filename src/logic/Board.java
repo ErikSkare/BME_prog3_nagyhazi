@@ -1,5 +1,6 @@
 package logic;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import logic.pieces.Pawn;
@@ -26,12 +27,18 @@ public class Board {
 	private Field[][] fields;
 	
 	/**
+	 * Az eddig lépett lépések.
+	 */
+	private LinkedList<Move> pastMoves;
+	
+	/**
 	 * Konstruktor
 	 * @param whiteCapturedPool világos által leütöttek.
 	 * @param blackCapturedPool sötét által leütöttek.
 	 */
 	public Board(List<Piece> whiteCapturedPool, List<Piece> blackCapturedPool) {
 		this.fields = new Field[8][8];
+		this.pastMoves = new LinkedList<Move>();
 		for(int i = 0; i < 8; ++i)
 			for(int j = 0; j < 8; ++j)
 				this.fields[i][j] = new Field(this, i, j, (i + j) % 2 == 0);
@@ -53,5 +60,16 @@ public class Board {
 	 * @return Az aktuális állapot.
 	 */
 	public final State getCurrentState(boolean isWhiteNext) { return State.ONGOING; }
+	
+	/**
+	 * Hozzáad egy lépést a már lépet lépésekhez.
+	 * @param m az új lépés.
+	 */
+	public final void addPastMove(Move m) { pastMoves.addFirst(m); }
+	
+	/**
+	 * @return Az eddigi lépések.
+	 */
+	public final LinkedList<Move> getPastMoves() { return this.pastMoves; }
 	
 }

@@ -101,10 +101,11 @@ public class FieldView extends JPanel {
 				if(boardView.getMovingPlayer().getPlaying().getIsWhiteCurrent() != field.getPiece().getIsWhite())
 					return;
 				boardView.addAvailableMoves(field.getPiece(), field.getPiece().getAvailableMoves());
-			} else {
+			} else if (boardView.getState() == BoardView.State.MOVING){
 				if(isMoveable()) {
 					boardView.getActivePiece().makeMove(move);
 					boardView.getMovingPlayer().resignStepPermission();
+					boardView.setPastMovesIt(boardView.getBoard().getPastMoves().listIterator());
 				}
 				boardView.clearAvailableMoves();
 			}

@@ -93,6 +93,7 @@ abstract public class Piece {
 	 * @param m a lépés.
 	 */
 	public void makeMove(Move m) { 
+		this.field.getBoard().addPastMove(m);
 		m.execute();
 	}
 	

@@ -9,6 +9,11 @@ import logic.Piece;
  * Olyan effekt, ami egy bábut léptet.
  */
 public class MoveEffect extends Effect {
+	
+	/**
+	 * Ahonnan lépett a bábu
+	 */
+	private Field from;
 
 	/**
 	 * Ahova lép a bábu.
@@ -22,6 +27,7 @@ public class MoveEffect extends Effect {
 	 */
 	public MoveEffect(Piece piece, Field to) {
 		super(piece);
+		this.from = piece.getField();
 		this.to = to;
 	}
 	
@@ -34,6 +40,11 @@ public class MoveEffect extends Effect {
 	public void run() {
 		this.getPiece().getField().stepOff();
 		this.getTo().stepOn(this.getPiece());
+	}
+
+	@Override
+	public Effect reverse() {
+		return new MoveEffect(this.getPiece(), this.from);
 	}
 
 }
