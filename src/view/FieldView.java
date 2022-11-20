@@ -96,7 +96,7 @@ public class FieldView extends JPanel {
 			if(boardView.getState() == BoardView.State.THINKING) {
 				if(field.getPiece() == null) 
 					return;
-				if(boardView.getMovingPlayer().getPlaying().getWhite().hasStepPermission() != field.getPiece().getIsWhite())
+				if(boardView.getMovingPlayer().getPlaying().getIsWhiteCurrent() != field.getPiece().getIsWhite())
 					return;
 				boardView.addAvailableMoves(field.getPiece(), field.getPiece().getAvailableMoves());
 			} else {

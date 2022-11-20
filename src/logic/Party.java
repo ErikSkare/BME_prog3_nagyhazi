@@ -58,10 +58,17 @@ public class Party {
 	public final Player getBlack() { return this.black; }
 	
 	/**
-	 * @return Fehér-e a következő.
+	 * @return Az aktuálisan lépő játékos.
 	 */
 	public final Player getCurrentPlayer() {
 		return white.hasStepPermission() ? white : black;
+	}
+	
+	/**
+	 * @return Világos-e a következő.
+	 */
+	public final boolean getIsWhiteCurrent() {
+		return white.hasStepPermission();
 	}
 	
 	/**
