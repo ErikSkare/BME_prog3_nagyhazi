@@ -46,22 +46,10 @@ public class King extends Piece {
 		Board b = curr.getBoard();
 		int x = curr.getXCoord();
 		int y = curr.getYCoord();
-		if(x + 1 < 8)
-			result.add(b.getFieldAt(y, x + 1));
-		if(x - 1 >= 0)
-			result.add(b.getFieldAt(y, x - 1));
-		if(y + 1 < 8)
-			result.add(b.getFieldAt(y + 1, x));
-		if(y - 1 >= 0)
-			result.add(b.getFieldAt(y - 1, x));
-		if(y + 1 < 8 && x + 1 < 8)
-			result.add(b.getFieldAt(y + 1, x + 1));
-		if(y + 1 < 8 && x - 1 >= 0)
-			result.add(b.getFieldAt(y + 1, x - 1));
-		if(y - 1 >= 0 && x + 1 < 8)
-			result.add(b.getFieldAt(y - 1, x + 1));
-		if(y - 1 >= 0 && x - 1 >= 0)
-			result.add(b.getFieldAt(y - 1, x - 1));
+		for(int i = -1; i <= 1; ++i)
+			for(int j = -1; j <= 1; ++j)
+				if(x + i >= 0 && x + i < 8 && y + j >= 0 && y + j < 8)
+					result.add(b.getFieldAt(y + j, x + i));
 		return result;
 	}
 
