@@ -3,13 +3,21 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 
-import logic.Board.State;
-
 /**
  * @author Skáre Erik
  * Egy partit reprezentál.
  */
 public class Party {
+	
+	/**
+	 * Az parti lehetséges állapotai.
+	 */
+	public enum State {
+		ONGOING,
+		DRAW,
+		WHITE_VICTORY,
+		BLACK_VICTORY
+	}
 	
 	/**
 	 * A világossal játszó játékos.
@@ -26,7 +34,10 @@ public class Party {
 	 */
 	private Board board;
 	
-	private Board.State partyState;
+	/**
+	 * A parti aktuális állapota.
+	 */
+	private Party.State partyState;
 	
 	/**
 	 * A lista, ahova a világos által leütött bábuk kerülnek.
@@ -45,7 +56,7 @@ public class Party {
 	public Party(Player white, Player black) {
 		this.white = white;
 		this.black = black;
-		this.partyState = State.ONGOING;
+		this.partyState = Party.State.ONGOING;
 		this.whiteCapturedPool = new ArrayList<Piece>();
 		this.blackCapturedPool = new ArrayList<Piece>();
 		this.board = new Board(whiteCapturedPool, blackCapturedPool);
@@ -89,17 +100,19 @@ public class Party {
 	/**
 	 * @return A 'partyState' attribútum értéke.
 	 */
-	public final Board.State getPartyState() { return this.partyState; }
+	public final Party.State getPartyState() { return this.partyState; }
 	
 	/**
 	 * Visszaadja a lépési jogát valaki.
 	 * @param by a visszaadó játékos.
 	 */
 	public void returnStepPermission(Player by) {
+		if(this.partyState != Party.State.ONGOING)
+			return;
 		boolean isWhiteNext = (by == this.black);
-		Board.State state = this.board.getCurrentState(isWhiteNext);
+		Party.State state = this.board.getCurrentState(isWhiteNext);
 		this.partyState = state;
-		if(state != Board.State.ONGOING)
+		if(state != Party.State.ONGOING)
 			return;
 		if(isWhiteNext)
 			this.white.grantStepPermission();
@@ -107,9 +120,12 @@ public class Party {
 			this.black.grantStepPermission();
 	}
 	
+	/**
+	 * Döntetlenné teszi a partit.
+	 */
 	public void makeDraw() {
+		this.partyState = Party.State.DRAW;
 		this.getCurrentPlayer().resignStepPermission();
-		this.partyState = Board.State.DRAW;
 	}
 	
 }

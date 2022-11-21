@@ -23,6 +23,9 @@ public class MoveEffect extends Effect {
 	 */
 	private Field to;
 	
+	/**
+	 * A bábu, ami leütődik, vagy null ha nincs ilyen.
+	 */
 	private Piece capturing;
 	
 	/**

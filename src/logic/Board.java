@@ -21,16 +21,6 @@ import logic.pieces.Rook;
 public class Board {
 	
 	/**
-	 * Az állás lehetséges állapotai.
-	 */
-	public enum State {
-		ONGOING,
-		DRAW,
-		WHITE_VICTORY,
-		BLACK_VICTORY
-	}
-	
-	/**
 	 * A tábla mezői.
 	 */
 	private Field[][] fields;
@@ -40,10 +30,19 @@ public class Board {
 	 */
 	private LinkedList<Move> pastMoves;
 	
+	/**
+	 * A tábla aktuális állapota (múltbeli vagy sem)
+	 */
 	private ListIterator<Move> pastMovesIt;
 	
+	/**
+	 * A világos királya
+	 */
 	private King whiteKing;
 	
+	/**
+	 * A sötét királya
+	 */
 	private King blackKing;
 	
 	/**
@@ -100,17 +99,17 @@ public class Board {
 	 * @param isWhiteNext fehér következik-e.
 	 * @return Az aktuális állapot.
 	 */
-	public final State getCurrentState(boolean isWhiteNext) { 
+	public final Party.State getCurrentState(boolean isWhiteNext) { 
 		King k = this.getKing(isWhiteNext);
 		if(k.isInCheck() && !hasAvailableMoves(isWhiteNext)) {
 			if(isWhiteNext)
-				return State.BLACK_VICTORY;
+				return Party.State.BLACK_VICTORY;
 			else
-				return State.WHITE_VICTORY;
+				return Party.State.WHITE_VICTORY;
 		}
 		if(!k.isInCheck() && !hasAvailableMoves(isWhiteNext))
-			return State.DRAW;
-		return State.ONGOING;
+			return Party.State.DRAW;
+		return Party.State.ONGOING;
 	}
 	
 	/**
@@ -127,6 +126,10 @@ public class Board {
 	 */
 	public final LinkedList<Move> getPastMoves() { return this.pastMoves; }
 	
+	/**
+	 * Visszalép a táblán a korábbi lépések alapján.
+	 * @return Sikeres volt-e a művelet.
+	 */
 	public final boolean stepBack() {
 		if(pastMovesIt.hasNext()) {
 			Move m = pastMovesIt.next();
@@ -136,6 +139,10 @@ public class Board {
 		return false;
 	}
 	
+	/**
+	 * Előrelép a táblán ha régebbi állapotnál vagyunk.
+	 * @return Sikeres volt-e a művelet.
+	 */
 	public final boolean stepForward() {
 		if(pastMovesIt.hasPrevious()) {
 			Move m = pastMovesIt.previous();
@@ -145,10 +152,17 @@ public class Board {
 		return false;
 	}
 	
+	/**
+	 * @return A legutóbbi állást kezeljük-e.
+	 */
 	public final boolean isInNow() {
 		return !pastMovesIt.hasPrevious();
 	}
 	
+	/**
+	 * @param isWhite fehér-e.
+	 * @return Az összes adott szín által kontrollált mező.
+	 */
 	public final Set<Field> getControlledFields(boolean isWhite) {
 		Set<Field> result = new HashSet<Field>();
 		for(int i = 0; i < 8; ++i) {
@@ -161,6 +175,10 @@ public class Board {
 		return result;
 	}
 	
+	/**
+	 * @param isWhite fehér-e.
+	 * @return Az adott szín királya.
+	 */
 	public final King getKing(boolean isWhite) {
 		if(isWhite)
 			return whiteKing;
@@ -168,6 +186,10 @@ public class Board {
 			return blackKing;
 	}
 	
+	/**
+	 * @param isWhite fehér-e.
+	 * @return Van-e legális lépése a megadott színnek.
+	 */
 	public final boolean hasAvailableMoves(boolean isWhite) {
 		ArrayList<Move> result = new ArrayList<Move>();
 		for(int i = 0; i < 8; ++i) {

@@ -18,25 +18,13 @@ public class Knight extends Piece {
 	@Override
 	public List<Move> getAvailableMoves() {
 		ArrayList<Move> result = new ArrayList<Move>();
-		
-		Move curr;
-		curr = getMoveRelative(1, 2);
-		if(curr != null) result.add(curr);
-		curr = getMoveRelative(2, 1);
-		if(curr != null) result.add(curr);
-		curr = getMoveRelative(-1, 2);
-		if(curr != null) result.add(curr);
-		curr = getMoveRelative(2, -1);
-		if(curr != null) result.add(curr);
-		curr = getMoveRelative(-2, 1);
-		if(curr != null) result.add(curr);
-		curr = getMoveRelative(1, -2);
-		if(curr != null) result.add(curr);
-		curr = getMoveRelative(-2, -1);
-		if(curr != null) result.add(curr);
-		curr = getMoveRelative(-1, -2);
-		if(curr != null) result.add(curr);
-		
+		for(Field f : this.getControlledFields()) {
+			if(!f.hasPiece() || f.getPiece().canBeTaken(this)) {
+				Move m = new Move(f, () -> {});
+				m.addEffect(new MoveEffect(this, f));
+				result.add(m);
+			}
+		}
 		return this.filterMoves(result);
 	}
 	
@@ -64,6 +52,14 @@ public class Knight extends Piece {
 		
 		return result;
 	}
+
+	@Override
+	public String getImageSrc() {
+		if(this.getIsWhite())
+			return "pictures/white_knight.png";
+		else
+			return "pictures/black_knight.png";
+	}
 	
 	private Field getFieldRelative(int dy, int dx) {
 		Field where = this.getField();
@@ -75,26 +71,6 @@ public class Knight extends Piece {
 			return f;
 		}
 		return null;
-	}
-	
-	private Move getMoveRelative(int dy, int dx) {
-		Field curr = getFieldRelative(dy, dx);
-		if(curr != null) {
-			if(!curr.hasPiece() || curr.getPiece().canBeTaken(this)) {
-				Move m = new Move(curr, () -> {});
-				m.addEffect(new MoveEffect(this, curr));
-				return m;
-			}
-		}
-		return null;
-	}
-
-	@Override
-	public String getImageSrc() {
-		if(this.getIsWhite())
-			return "pictures/white_knight.png";
-		else
-			return "pictures/black_knight.png";
 	}
 
 }

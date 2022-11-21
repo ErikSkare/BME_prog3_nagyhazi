@@ -8,8 +8,16 @@ import logic.Piece;
 
 public class AddEffect extends Effect {
 	
+	/**
+	 * Ahova hozzáadódik a bábu.
+	 */
 	private Field where;
 
+	/**
+	 * Konstruktor
+	 * @param piece a bábu.
+	 * @param where hova.
+	 */
 	public AddEffect(Piece piece, Field where) {
 		super(piece);
 		this.where = where;

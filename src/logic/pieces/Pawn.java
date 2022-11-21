@@ -15,14 +15,11 @@ import logic.effects.MoveEffect;
  */
 public class Pawn extends Piece {
 	
+	/**
+	 * Első lépés-e a gyaloggal.
+	 */
 	private boolean isFirstMove;
 
-	/**
-	 * @param field			a mező.
-	 * @param isWhite		fehér-e
-	 * @param value			a bábu értéke.
-	 * @param capturedPool	ha leütik, ide kerül.
-	 */
 	public Pawn(Field field, boolean isWhite, int value, List<Piece> capturedPool) {
 		super(field, isWhite, value, capturedPool);
 		this.isFirstMove = true;

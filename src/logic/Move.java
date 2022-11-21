@@ -13,6 +13,9 @@ public class Move {
 		public void call();
 	}
 	
+	/**
+	 * A lépés után meghívódik.
+	 */
 	private Callback cb;
 	
 	/**
@@ -28,6 +31,7 @@ public class Move {
 	/**
 	 * Konstruktor
 	 * @param indicator mező.
+	 * @param cb callback.
 	 */
 	public Move(Field indicator, Callback cb) {
 		this.effects = new ArrayList<Effect>();
@@ -55,6 +59,9 @@ public class Move {
 		this.cb.call();
 	}
 	
+	/**
+	 * Végrehajtja a lépést callback nélkül.
+	 */
 	public void executeWithoutCallback() {
 		for(Effect e : this.effects)
 			e.run();

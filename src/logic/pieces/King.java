@@ -16,6 +16,9 @@ public class King extends Piece {
 		super(field, isWhite, value, capturedPool);
 	}
 	
+	/**
+	 * @return Sakkban van-e a király.
+	 */
 	public final boolean isInCheck() {
 		Set<Field> opponentControlled = this.getField().getBoard().getControlledFields(!this.getIsWhite());
 		return opponentControlled.contains(this.getField());

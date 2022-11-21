@@ -47,6 +47,9 @@ abstract public class Piece {
 	 */
 	abstract public List<Move> getAvailableMoves();
 	
+	/**
+	 * @return Visszaadja a bábu által kontrollált mezőket.
+	 */
 	abstract public List<Field> getControlledFields();
 	
 	/**
@@ -100,6 +103,10 @@ abstract public class Piece {
 		m.execute();
 	}
 	
+	/**
+	 * @param moves a lépések.
+	 * @return Azok a lépések, amelyek után a király nem lesz sakkban.
+	 */
 	protected final ArrayList<Move> filterMoves(ArrayList<Move> moves) {
 		ArrayList<Move> filtered = new ArrayList<Move>();
 		for(Move m : moves) {

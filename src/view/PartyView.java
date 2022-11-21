@@ -8,7 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import logic.Board;
 import logic.Party;
 
 /**
@@ -50,7 +49,7 @@ public class PartyView extends JPanel {
 		
 		this.drawButton = new JButton("Make draw");
 		this.drawButton.addActionListener(new OnDrawButtonClick());
-		if(this.party.getPartyState() != Board.State.ONGOING)
+		if(this.party.getPartyState() != Party.State.ONGOING)
 			this.drawButton.setEnabled(false);;
 		
 		this.add(this.boardView, BorderLayout.CENTER);
