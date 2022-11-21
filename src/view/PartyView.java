@@ -4,13 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
-
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import logic.Board;
 import logic.Party;
 
 /**
@@ -49,8 +47,11 @@ public class PartyView extends JPanel {
 		
 		this.stateText = new JLabel(this.party.getPartyState().toString());
 		this.stateText.setHorizontalAlignment(JLabel.CENTER);
+		
 		this.drawButton = new JButton("Make draw");
 		this.drawButton.addActionListener(new OnDrawButtonClick());
+		if(this.party.getPartyState() != Board.State.ONGOING)
+			this.drawButton.setEnabled(false);;
 		
 		this.add(this.boardView, BorderLayout.CENTER);
 		this.add(this.stateText, BorderLayout.NORTH);
@@ -64,13 +65,15 @@ public class PartyView extends JPanel {
 	
 	public final JLabel getStateText() { return this.stateText; }
 	
+	public final void disableDrawButton() { this.drawButton.setEnabled(false); }
+	
 	class OnDrawButtonClick implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			party.makeDraw();
 			stateText.setText(party.getPartyState().toString());
-			drawButton.setEnabled(false);
+			disableDrawButton();
 		}
 		
 	}

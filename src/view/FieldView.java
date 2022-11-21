@@ -107,6 +107,8 @@ public class FieldView extends JPanel {
 					boardView.setPastMovesIt(boardView.getBoard().getPastMoves().listIterator());
 					PartyView pv = boardView.getPartyView();
 					pv.getStateText().setText(pv.getParty().getPartyState().toString());
+					if(pv.getParty().getCurrentPlayer() == null)
+						pv.disableDrawButton();
 				}
 				boardView.clearAvailableMoves();
 			}
