@@ -38,7 +38,8 @@ public class Pawn extends Piece {
 		// First move
 		if(this.isFirstMove) {
 			Field to = b.getFieldAt(current.getYCoord() + mul * 2, current.getXCoord());
-			if(!to.hasPiece()) {
+			Field before = b.getFieldAt(current.getYCoord() + mul, current.getXCoord());
+			if(!to.hasPiece() && !before.hasPiece()) {
 				Move m = new Move(to, () -> { this.isFirstMove = false; });
 				m.addEffect(new MoveEffect(this, to));
 				result.add(m);
