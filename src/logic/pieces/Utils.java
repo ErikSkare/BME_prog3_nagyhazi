@@ -96,4 +96,16 @@ public class Utils {
 	
 		return result;
 	}
+	
+	public static Field getFieldRelative(Piece p, int dy, int dx) {
+		Field where = p.getField();
+		Board b = where.getBoard();
+		int y = where.getYCoord();
+		int x = where.getXCoord();
+		if(y + dy >= 0 && y + dy < 8 && x + dx >= 0 && x + dx < 8) {
+			Field f = b.getFieldAt(y + dy, x + dx);
+			return f;
+		}
+		return null;
+	}
 }
