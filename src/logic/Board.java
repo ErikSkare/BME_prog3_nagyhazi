@@ -95,6 +95,10 @@ public class Board {
 	 */
 	public final Field getFieldAt(int y, int x) { return this.fields[y][x]; }
 	
+	public Piece getPromotionPiece(Pawn p) {
+		return new Queen(null, p.getIsWhite(), 9, p.getCapturedPool());
+	}
+	
 	/**
 	 * @param isWhiteNext fehér következik-e.
 	 * @return Az aktuális állapot.

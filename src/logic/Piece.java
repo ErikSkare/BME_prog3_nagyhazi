@@ -27,7 +27,7 @@ abstract public class Piece {
 	/**
 	 * Lista, amibe kerül a bábu ha leütik.
 	 */
-	List<Piece> capturedPool;
+	private List<Piece> capturedPool;
 	
 	private boolean hasMoved;
 	
@@ -91,6 +91,8 @@ abstract public class Piece {
 	 */
 	public final int getValue() { return this.value; }
 	
+	public final List<Piece> getCapturedPool() { return this.capturedPool; }
+	
 	/**
 	 * @param p a leütést kezdeményező
 	 * @return Leüthető-e.
@@ -130,9 +132,10 @@ abstract public class Piece {
 	 */
 	protected final ArrayList<Move> filterMoves(ArrayList<Move> moves) {
 		ArrayList<Move> filtered = new ArrayList<Move>();
+		Board b = this.getField().getBoard();
 		for(Move m : moves) {
 			m.executeWithoutCallback();
-			if(!this.getField().getBoard().getKing(this.getIsWhite()).isInCheck())
+			if(!b.getKing(this.getIsWhite()).isInCheck())
 				filtered.add(m);
 			m.executeReverse();
 		}

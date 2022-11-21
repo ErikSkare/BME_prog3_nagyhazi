@@ -1,5 +1,6 @@
 package logic.effects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import logic.Effect;
@@ -30,8 +31,9 @@ public class AddEffect extends Effect {
 
 	@Override
 	public List<Effect> reverse() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Effect> result = new ArrayList<Effect>();
+		result.add(new RemoveEffect(this.getPiece()));
+		return result;
 	}
 
 }

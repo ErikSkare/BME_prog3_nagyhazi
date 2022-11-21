@@ -7,7 +7,9 @@ import logic.Board;
 import logic.Field;
 import logic.Move;
 import logic.Piece;
+import logic.effects.AddEffect;
 import logic.effects.MoveEffect;
+import logic.effects.RemoveEffect;
 
 /**
  * @author Skáre Erik
@@ -52,8 +54,18 @@ public class Pawn extends Piece {
 		// Forward
 		Field frontOf = b.getFieldAt(current.getYCoord() + mul, current.getXCoord());
 		if(!frontOf.hasPiece()) {
+			// Promoting
+			Field canPromoteFrom = this.getIsWhite() 
+					? b.getFieldAt(1, current.getXCoord())
+					: b.getFieldAt(6, current.getXCoord());
+			
 			Move m = new Move(frontOf, () -> { this.isFirstMove = false; this.enPassant = false; });
-			m.addEffect(new MoveEffect(this, frontOf));
+			if(current == canPromoteFrom) {
+				Piece promote = b.getPromotionPiece(this);
+				m.addEffect(new RemoveEffect(this));
+				m.addEffect(new AddEffect(promote, frontOf));
+			} else
+				m.addEffect(new MoveEffect(this, frontOf));
 			result.add(m);
 		}
 		
