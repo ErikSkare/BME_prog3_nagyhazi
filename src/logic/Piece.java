@@ -61,6 +61,16 @@ abstract public class Piece {
 	abstract public String getImageSrc();
 	
 	/**
+	 * @return Leüthető-e En passant lépéssel.
+	 */
+	public boolean canTakeEnPassant() { return false; }
+	
+	/**
+	 * Elmulasztja az en passant lépést.
+	 */
+	public void forfeitEnPassant() { }
+	
+	/**
 	 * @return A mező.
 	 */
 	public final Field getField() { return this.field; }
@@ -104,9 +114,14 @@ abstract public class Piece {
 	 * @param m a lépés.
 	 */
 	public void makeMove(Move m) { 
-		this.field.getBoard().addPastMove(m);
+		Board b = this.field.getBoard();
+		b.addPastMove(m);
 		this.hasMoved = true;
 		m.execute();
+		for(int i = 0; i < 8; ++i)
+			for(int j = 0; j < 8; ++j)
+				if(b.getFieldAt(i, j).hasPiece() && b.getFieldAt(i, j).getPiece().getIsWhite() != this.getIsWhite())
+					b.getFieldAt(i, j).getPiece().forfeitEnPassant();
 	}
 	
 	/**

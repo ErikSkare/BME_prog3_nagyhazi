@@ -19,10 +19,16 @@ public class Pawn extends Piece {
 	 * Első lépés-e a gyaloggal.
 	 */
 	private boolean isFirstMove;
+	
+	/**
+	 * Leüthető-e en passant lépéssel.
+	 */
+	private boolean enPassant;
 
 	public Pawn(Field field, boolean isWhite, int value, List<Piece> capturedPool) {
 		super(field, isWhite, value, capturedPool);
 		this.isFirstMove = true;
+		this.enPassant = false;
 	}
 
 	@Override
@@ -37,7 +43,7 @@ public class Pawn extends Piece {
 			Field to = b.getFieldAt(current.getYCoord() + mul * 2, current.getXCoord());
 			Field before = b.getFieldAt(current.getYCoord() + mul, current.getXCoord());
 			if(!to.hasPiece() && !before.hasPiece()) {
-				Move m = new Move(to, () -> { this.isFirstMove = false; });
+				Move m = new Move(to, () -> { this.isFirstMove = false; this.enPassant = true; });
 				m.addEffect(new MoveEffect(this, to));
 				result.add(m);
 			}
@@ -46,7 +52,7 @@ public class Pawn extends Piece {
 		// Forward
 		Field frontOf = b.getFieldAt(current.getYCoord() + mul, current.getXCoord());
 		if(!frontOf.hasPiece()) {
-			Move m = new Move(frontOf, () -> { this.isFirstMove = false; });
+			Move m = new Move(frontOf, () -> { this.isFirstMove = false; this.enPassant = false; });
 			m.addEffect(new MoveEffect(this, frontOf));
 			result.add(m);
 		}
@@ -55,7 +61,15 @@ public class Pawn extends Piece {
 		if(current.getXCoord() - 1 >= 0) {
 			Field leftCapture = b.getFieldAt(current.getYCoord() + mul, current.getXCoord() - 1);
 			if(leftCapture.hasPiece() && leftCapture.getPiece().canBeTaken(this)) {
-				Move m = new Move(leftCapture, () -> { this.isFirstMove = false; });
+				Move m = new Move(leftCapture, () -> { this.isFirstMove = false; this.enPassant = false; });
+				m.addEffect(new MoveEffect(this, leftCapture));
+				result.add(m);
+			}
+			// En passant
+			Field enPassantLeft = b.getFieldAt(current.getYCoord(), current.getXCoord() - 1);
+			if(!leftCapture.hasPiece() && enPassantLeft.hasPiece() && enPassantLeft.getPiece().canTakeEnPassant()) {
+				Move m = new Move(leftCapture, () -> { this.isFirstMove = false; this.enPassant = false; });
+				m.addEffect(new MoveEffect(this, enPassantLeft));
 				m.addEffect(new MoveEffect(this, leftCapture));
 				result.add(m);
 			}
@@ -65,7 +79,15 @@ public class Pawn extends Piece {
 		if(current.getXCoord() + 1 < 8) {
 			Field rightCapture = b.getFieldAt(current.getYCoord() + mul, current.getXCoord() + 1);
 			if(rightCapture.hasPiece() && rightCapture.getPiece().canBeTaken(this)) {
-				Move m = new Move(rightCapture, () -> { this.isFirstMove = false; });
+				Move m = new Move(rightCapture, () -> { this.isFirstMove = false; this.enPassant = false; });
+				m.addEffect(new MoveEffect(this, rightCapture));
+				result.add(m);
+			}
+			// En passant
+			Field enPassantRight = b.getFieldAt(current.getYCoord(), current.getXCoord() + 1);
+			if(!rightCapture.hasPiece() && enPassantRight.hasPiece() && enPassantRight.getPiece().canTakeEnPassant()) {
+				Move m = new Move(rightCapture, () -> { this.isFirstMove = false; this.enPassant = false; });
+				m.addEffect(new MoveEffect(this, enPassantRight));
 				m.addEffect(new MoveEffect(this, rightCapture));
 				result.add(m);
 			}
@@ -97,6 +119,14 @@ public class Pawn extends Piece {
 			return "pictures/white_pawn.png";
 		else
 			return "pictures/black_pawn.png";
+	}
+	
+	public boolean canTakeEnPassant() {
+		return this.enPassant;
+	}
+	
+	public void forfeitEnPassant() {
+		this.enPassant = false;
 	}
 
 }
