@@ -4,8 +4,6 @@ import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.List;
-import java.util.ListIterator;
-
 import javax.swing.JPanel;
 
 import logic.Board;
@@ -41,8 +39,6 @@ public class BoardView extends JPanel {
 	 */
 	private Board board;
 	
-	private ListIterator<Move> pastMovesIt;
-	
 	/**
 	 * A mezőkhöz tartozó nézetek.
 	 */
@@ -66,7 +62,6 @@ public class BoardView extends JPanel {
 		super(new GridLayout(0, 8));
 		this.state = State.THINKING;
 		this.board = board;
-		this.pastMovesIt = board.getPastMoves().listIterator();
 		this.partyView = partyView;
 		this.activePiece = null;
 		
@@ -86,12 +81,6 @@ public class BoardView extends JPanel {
 	 * @return A tábla, amit megjelenít.
 	 */
 	public final Board getBoard() { return this.board; }
-	
-	/**
-	 * Beállítja a múltbeli lépések iterátorát.
-	 * @param it az iterátor.
-	 */
-	public final void setPastMovesIt(ListIterator<Move> it) { this.pastMovesIt = it; }
 	
 	/**
 	 * @return Az éppen lépő játékos.
@@ -145,17 +134,12 @@ public class BoardView extends JPanel {
 		public void keyPressed(KeyEvent e) {
 			if(state == State.MOVING)
 				return;
-			if(e.getKeyCode() == 37 && pastMovesIt.hasNext()) {
+			if(e.getKeyCode() == 37 && board.stepBack()) {
+				repaint();
 				state = State.HISTORY;
-				Move m = pastMovesIt.next();
-				m.executeReverse();
+			} else if(e.getKeyCode() == 39 && board.stepForward())
 				repaint();
-			} else if(e.getKeyCode() == 39 && pastMovesIt.hasPrevious()) {
-				Move m = pastMovesIt.previous();
-				m.execute();
-				repaint();
-			}
-			if(!pastMovesIt.hasPrevious())
+			if(board.isInNow())
 				state = State.THINKING;
 		}
 

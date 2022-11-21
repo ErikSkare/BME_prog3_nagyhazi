@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Set;
 
 import logic.pieces.Bishop;
@@ -39,6 +40,8 @@ public class Board {
 	 */
 	private LinkedList<Move> pastMoves;
 	
+	private ListIterator<Move> pastMovesIt;
+	
 	private King whiteKing;
 	
 	private King blackKing;
@@ -51,6 +54,7 @@ public class Board {
 	public Board(List<Piece> whiteCapturedPool, List<Piece> blackCapturedPool) {
 		this.fields = new Field[8][8];
 		this.pastMoves = new LinkedList<Move>();
+		this.pastMovesIt = this.pastMoves.listIterator();
 		for(int i = 0; i < 8; ++i)
 			for(int j = 0; j < 8; ++j)
 				this.fields[i][j] = new Field(this, i, j, (i + j) % 2 == 0);
@@ -113,12 +117,37 @@ public class Board {
 	 * Hozzáad egy lépést a már lépet lépésekhez.
 	 * @param m az új lépés.
 	 */
-	public final void addPastMove(Move m) { pastMoves.addFirst(m); }
+	public final void addPastMove(Move m) { 
+		pastMoves.addFirst(m); 
+		pastMovesIt = pastMoves.listIterator();
+	}
 	
 	/**
 	 * @return Az eddigi lépések.
 	 */
 	public final LinkedList<Move> getPastMoves() { return this.pastMoves; }
+	
+	public final boolean stepBack() {
+		if(pastMovesIt.hasNext()) {
+			Move m = pastMovesIt.next();
+			m.executeReverse();
+			return true;
+		}
+		return false;
+	}
+	
+	public final boolean stepForward() {
+		if(pastMovesIt.hasPrevious()) {
+			Move m = pastMovesIt.previous();
+			m.execute();
+			return true;
+		}
+		return false;
+	}
+	
+	public final boolean isInNow() {
+		return !pastMovesIt.hasPrevious();
+	}
 	
 	public final Set<Field> getControlledFields(boolean isWhite) {
 		Set<Field> result = new HashSet<Field>();
