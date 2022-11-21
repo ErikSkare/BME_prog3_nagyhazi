@@ -29,6 +29,8 @@ abstract public class Piece {
 	 */
 	List<Piece> capturedPool;
 	
+	private boolean hasMoved;
+	
 	/**
 	 * @param field			mező
 	 * @param isWhite		fehér-e
@@ -40,6 +42,7 @@ abstract public class Piece {
 		this.isWhite = isWhite;
 		this.value = value;
 		this.capturedPool = capturedPool;
+		this.hasMoved = false;
 	}
 	
 	/**
@@ -86,6 +89,8 @@ abstract public class Piece {
 		return this.getIsWhite() != p.getIsWhite();
 	}
 	
+	public boolean getHasMoved() { return this.hasMoved; }
+	
 	/**
 	 * Leüti a bábut.
 	 */
@@ -100,6 +105,7 @@ abstract public class Piece {
 	 */
 	public void makeMove(Move m) { 
 		this.field.getBoard().addPastMove(m);
+		this.hasMoved = true;
 		m.execute();
 	}
 	
