@@ -1,5 +1,6 @@
 package logic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,6 +47,8 @@ abstract public class Piece {
 	 */
 	abstract public List<Move> getAvailableMoves();
 	
+	abstract public List<Field> getControlledFields();
+	
 	/**
 	 * @return A kép elérési útvonala, amin a bábu van.
 	 */
@@ -76,7 +79,7 @@ abstract public class Piece {
 	 * @param p a leütést kezdeményező
 	 * @return Leüthető-e.
 	 */
-	public final boolean canBeTaken(Piece p) {
+	public boolean canBeTaken(Piece p) {
 		return this.getIsWhite() != p.getIsWhite();
 	}
 	
@@ -95,6 +98,17 @@ abstract public class Piece {
 	public void makeMove(Move m) { 
 		this.field.getBoard().addPastMove(m);
 		m.execute();
+	}
+	
+	protected final ArrayList<Move> filterMoves(ArrayList<Move> moves) {
+		ArrayList<Move> filtered = new ArrayList<Move>();
+		for(Move m : moves) {
+			m.executeWithoutCallback();
+			if(!this.getField().getBoard().getKing(this.getIsWhite()).isInCheck())
+				filtered.add(m);
+			m.executeReverse();
+		}
+		return filtered;
 	}
 	
 }

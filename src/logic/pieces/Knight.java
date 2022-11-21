@@ -37,19 +37,52 @@ public class Knight extends Piece {
 		curr = getMoveRelative(-1, -2);
 		if(curr != null) result.add(curr);
 		
+		return this.filterMoves(result);
+	}
+	
+	@Override
+	public List<Field> getControlledFields() {
+		ArrayList<Field> result = new ArrayList<Field>();
+		
+		Field curr;
+		curr = getFieldRelative(1, 2);
+		if(curr != null) result.add(curr);
+		curr = getFieldRelative(2, 1);
+		if(curr != null) result.add(curr);
+		curr = getFieldRelative(-1, 2);
+		if(curr != null) result.add(curr);
+		curr = getFieldRelative(2, -1);
+		if(curr != null) result.add(curr);
+		curr = getFieldRelative(-2, 1);
+		if(curr != null) result.add(curr);
+		curr = getFieldRelative(1, -2);
+		if(curr != null) result.add(curr);
+		curr = getFieldRelative(-2, -1);
+		if(curr != null) result.add(curr);
+		curr = getFieldRelative(-1, -2);
+		if(curr != null) result.add(curr);
+		
 		return result;
 	}
 	
-	private Move getMoveRelative(int dy, int dx) {
+	private Field getFieldRelative(int dy, int dx) {
 		Field where = this.getField();
 		Board b = where.getBoard();
 		int y = where.getYCoord();
 		int x = where.getXCoord();
 		if(y + dy >= 0 && y + dy < 8 && x + dx >= 0 && x + dx < 8) {
 			Field f = b.getFieldAt(y + dy, x + dx);
-			if(!f.hasPiece() || f.getPiece().canBeTaken(this)) {
-				Move m = new Move(f, () -> {});
-				m.addEffect(new MoveEffect(this, f));
+			return f;
+		}
+		return null;
+	}
+	
+	private Move getMoveRelative(int dy, int dx) {
+		Field curr = getFieldRelative(dy, dx);
+		if(curr != null) {
+			if(!curr.hasPiece() || curr.getPiece().canBeTaken(this)) {
+				Move m = new Move(curr, () -> {});
+				m.addEffect(new MoveEffect(this, curr));
 				return m;
 			}
 		}

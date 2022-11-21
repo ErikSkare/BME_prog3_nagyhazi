@@ -73,6 +73,23 @@ public class Pawn extends Piece {
 			}
 		}
 		
+		return this.filterMoves(result);
+	}
+	
+	@Override
+	public List<Field> getControlledFields() {
+		ArrayList<Field> result = new ArrayList<Field>();
+		Board b = this.getField().getBoard();
+		Field current = this.getField();
+		int mul = this.getIsWhite() ? -1 : 1;
+		if(current.getXCoord() - 1 >= 0) {
+			Field leftCapture = b.getFieldAt(current.getYCoord() + mul, current.getXCoord() - 1);
+			result.add(leftCapture);
+		}
+		if(current.getXCoord() + 1 < 8) {
+			Field rightCapture = b.getFieldAt(current.getYCoord() + mul, current.getXCoord() + 1);
+			result.add(rightCapture);
+		}
 		return result;
 	}
 

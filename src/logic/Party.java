@@ -107,4 +107,9 @@ public class Party {
 			this.black.grantStepPermission();
 	}
 	
+	public void makeDraw() {
+		this.getCurrentPlayer().resignStepPermission();
+		this.partyState = Board.State.DRAW;
+	}
+	
 }

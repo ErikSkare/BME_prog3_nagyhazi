@@ -51,9 +51,13 @@ public class Move {
 	 * Végrehajtja a lépést.
 	 */
 	public void execute() {
+		this.executeWithoutCallback();
+		this.cb.call();
+	}
+	
+	public void executeWithoutCallback() {
 		for(Effect e : this.effects)
 			e.run();
-		this.cb.call();
 	}
 	
 	/**

@@ -6,6 +6,7 @@ import java.util.List;
 import logic.Field;
 import logic.Move;
 import logic.Piece;
+import logic.effects.MoveEffect;
 
 public class Bishop extends Piece {
 
@@ -16,8 +17,19 @@ public class Bishop extends Piece {
 	@Override
 	public List<Move> getAvailableMoves() {
 		ArrayList<Move> result = new ArrayList<Move>();
-		result.addAll(Utils.getDiagonalMoves(this));
-		return result;
+		for(Field f : Utils.getDiagonalFields(this)) {
+			if(!f.hasPiece() || f.getPiece().canBeTaken(this)) {
+				Move m = new Move(f, () -> {});
+				m.addEffect(new MoveEffect(this, f));
+				result.add(m);
+			}
+		}
+		return this.filterMoves(result);
+	}
+	
+	@Override
+	public List<Field> getControlledFields() {
+		return Utils.getDiagonalFields(this);
 	}
 
 	@Override
