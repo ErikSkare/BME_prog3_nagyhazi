@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
@@ -18,13 +19,14 @@ public class Main {
 		p2.setPlaying(p);
 		
 		PartyView pv = new PartyView(p);
+		pv.setPreferredSize(new Dimension(600, 500));
 		
 		JFrame frame = new JFrame("FrameDemo");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setLayout(new FlowLayout());
 		frame.add(pv);;
-		frame.setSize(600, 600);
+		frame.setSize(700, 700);
 		frame.setResizable(false);
 		frame.setVisible(true);
 	}

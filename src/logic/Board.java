@@ -45,6 +45,12 @@ public class Board {
 	 */
 	private King blackKing;
 	
+	public interface Promotion {
+		public Piece getPiece(Pawn p);
+	}
+	
+	private Promotion promotion;
+	
 	/**
 	 * Konstruktor
 	 * @param whiteCapturedPool világos által leütöttek.
@@ -54,6 +60,7 @@ public class Board {
 		this.fields = new Field[8][8];
 		this.pastMoves = new LinkedList<Move>();
 		this.pastMovesIt = this.pastMoves.listIterator();
+		this.promotion = (p) -> new Queen(null, p.getIsWhite(), 9, p.getCapturedPool());
 		for(int i = 0; i < 8; ++i)
 			for(int j = 0; j < 8; ++j)
 				this.fields[i][j] = new Field(this, i, j, (i + j) % 2 == 0);
@@ -95,9 +102,13 @@ public class Board {
 	 */
 	public final Field getFieldAt(int y, int x) { return this.fields[y][x]; }
 	
-	public Piece getPromotionPiece(Pawn p) {
-		return new Queen(null, p.getIsWhite(), 9, p.getCapturedPool());
+	public final Piece getPromotionPiece(Pawn p) {
+		return this.promotion.getPiece(p);
 	}
+	
+	public final Promotion getPromotion() { return this.promotion; }
+	
+	public final void setPromotion(Promotion p) { this.promotion = p; }
 	
 	/**
 	 * @param isWhiteNext fehér következik-e.
