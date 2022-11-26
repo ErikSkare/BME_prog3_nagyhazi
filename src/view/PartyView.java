@@ -1,17 +1,14 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import logic.Board;
 import logic.Party;
 import logic.pieces.Bishop;
@@ -64,6 +61,8 @@ public class PartyView extends JPanel {
 	 */
 	private JComboBox<Promotion> promotionCombo;
 	
+	private SavePopupView savePopup;
+	
 	/**
 	 * Konstruktor
 	 * @param party a parti.
@@ -93,6 +92,8 @@ public class PartyView extends JPanel {
 		this.promotionCombo.setFocusable(false);
 		this.promotionCombo.addActionListener(new ComboAction());
 		this.setPromotion();
+		
+		this.savePopup = new SavePopupView(this.party);
 		
 		this.add(this.boardView, BorderLayout.CENTER);
 		this.add(this.stateText, BorderLayout.NORTH);
@@ -139,30 +140,6 @@ public class PartyView extends JPanel {
 		}
 	}
 	
-	/**
-	 * Elmenti a partit.
-	 * @param fileName a fájl neve.
-	 */
-	private void saveParty(String fileName) {
-		this.party.getBoard().stepToNow();
-		FileOutputStream fos = null;
-		ObjectOutputStream oos = null;
-	    try {
-	    	fos = new FileOutputStream(fileName);
-		    oos = new ObjectOutputStream(fos);
-			oos.writeObject(this.party);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if(oos != null)
-					oos.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
 	class OnDrawButtonClick implements ActionListener {
 
 		@Override
@@ -187,7 +164,12 @@ public class PartyView extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			saveParty("Test.parti");
+			Point p = getLocationOnScreen();
+			Dimension inner = savePopup.getPreferredSize();
+			Dimension outer = getPreferredSize();
+			savePopup.launch(PartyView.this, 
+					p.x + (outer.width - inner.width) / 2, 
+					p.y + (outer.height - inner.height) / 2);
 		}
 		
 	}
