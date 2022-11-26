@@ -164,6 +164,8 @@ public class PartyView extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			party.getBoard().stepToNow();
+			repaint();
 			Point p = getLocationOnScreen();
 			Dimension inner = savePopup.getPreferredSize();
 			Dimension outer = getPreferredSize();
