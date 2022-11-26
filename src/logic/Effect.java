@@ -1,12 +1,15 @@
 package logic;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author Skáre Erik
  * Csinál valamit a táblán egy bábuval.
  */
-abstract public class Effect {
+abstract public class Effect implements Serializable {
+	
+	private static final long serialVersionUID = -8149151912488462034L;
 	
 	/**
 	 * A bábu, amin az effekt végrehajtódik.

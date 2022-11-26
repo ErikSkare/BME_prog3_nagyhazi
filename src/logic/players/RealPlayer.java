@@ -8,6 +8,8 @@ import logic.Player;
  */
 public class RealPlayer extends Player {
 	
+	private static final long serialVersionUID = 6274118246228590898L;
+	
 	/**
 	 * A lépési jog.
 	 */

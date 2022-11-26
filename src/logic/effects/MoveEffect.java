@@ -13,6 +13,8 @@ import logic.Piece;
  */
 public class MoveEffect extends Effect {
 	
+	private static final long serialVersionUID = 7826060350341492898L;
+
 	/**
 	 * Ahonnan lépett a bábu
 	 */

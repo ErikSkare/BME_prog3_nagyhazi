@@ -3,6 +3,10 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -33,10 +37,19 @@ public class PartyView extends JPanel {
 	 */
 	private BoardView boardView;
 	
+	/**
+	 * Az aktuális állapotot kiíró label.
+	 */
 	private JLabel stateText;
 	
+	/**
+	 * A gomb, amivel döntetlenné lehet tenni a partit.
+	 */
 	private JButton drawButton;
 	
+	/**
+	 * A gomb, ami elmenti a partit.
+	 */
 	private JButton saveButton;
 	
 	enum Promotion {
@@ -46,6 +59,9 @@ public class PartyView extends JPanel {
 		QUEEN
 	}
 	
+	/**
+	 * A promóciós bábut lehet kiválasztani vele.
+	 */
 	private JComboBox<Promotion> promotionCombo;
 	
 	/**
@@ -56,6 +72,7 @@ public class PartyView extends JPanel {
 		super();
 		this.setLayout(new BorderLayout());
 		this.party = party;
+		this.party.getBoard().resetPastMovesIt();
 		
 		this.boardView = new BoardView(party.getBoard(), this);
 		
@@ -70,6 +87,7 @@ public class PartyView extends JPanel {
 		
 		this.saveButton = new JButton("Save game");
 		this.saveButton.setFocusable(false);
+		this.saveButton.addActionListener(new SaveAction());
 		
 		this.promotionCombo = new JComboBox<Promotion>(Promotion.values());
 		this.promotionCombo.setFocusable(false);
@@ -88,10 +106,19 @@ public class PartyView extends JPanel {
 	 */
 	public final Party getParty() { return this.party; }
 	
+	/**
+	 * @return Az állapotot megjelenítő label.
+	 */
 	public final JLabel getStateText() { return this.stateText; }
 	
+	/**
+	 * Kikapcsolja a döntetlen lehetőségét.
+	 */
 	public final void disableDrawButton() { this.drawButton.setEnabled(false); }
 	
+	/**
+	 * Beállítja a promóciós bábut a kiválasztottra.
+	 */
 	private void setPromotion() {
 		Board b = this.party.getBoard();
 		switch((Promotion) this.promotionCombo.getModel().getSelectedItem()) {
@@ -112,6 +139,30 @@ public class PartyView extends JPanel {
 		}
 	}
 	
+	/**
+	 * Elmenti a partit.
+	 * @param fileName a fájl neve.
+	 */
+	private void saveParty(String fileName) {
+		this.party.getBoard().stepToNow();
+		FileOutputStream fos = null;
+		ObjectOutputStream oos = null;
+	    try {
+	    	fos = new FileOutputStream(fileName);
+		    oos = new ObjectOutputStream(fos);
+			oos.writeObject(this.party);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(oos != null)
+					oos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	class OnDrawButtonClick implements ActionListener {
 
 		@Override
@@ -128,6 +179,15 @@ public class PartyView extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			setPromotion();
+		}
+		
+	}
+	
+	class SaveAction implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			saveParty("Test.parti");
 		}
 		
 	}

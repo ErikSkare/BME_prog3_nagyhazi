@@ -1,5 +1,6 @@
 package logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,8 +8,10 @@ import java.util.List;
  * @author Skáre Erik
  * Egy lehetséges lépés, az effektjeivel.
  */
-public class Move {
+public class Move implements Serializable {
 	
+	private static final long serialVersionUID = -2104860860316278513L;
+
 	public interface Callback {
 		public void call();
 	}

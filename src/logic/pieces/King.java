@@ -1,5 +1,6 @@
 package logic.pieces;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -8,9 +9,12 @@ import logic.Board;
 import logic.Field;
 import logic.Move;
 import logic.Piece;
+import logic.Move.Callback;
 import logic.effects.MoveEffect;
 
 public class King extends Piece {
+
+	private static final long serialVersionUID = 5801691492923319881L;
 
 	public King(Field field, boolean isWhite, int value, List<Piece> capturedPool) {
 		super(field, isWhite, value, capturedPool);
@@ -29,7 +33,7 @@ public class King extends Piece {
 		ArrayList<Move> result = new ArrayList<Move>();
 		for(Field f : this.getControlledFields()) {
 			if(!f.hasPiece() || f.getPiece().canBeTaken(this)) {
-				Move m = new Move(f, () -> {});
+				Move m = new Move(f, (Callback & Serializable) () -> {});
 				m.addEffect(new MoveEffect(this, f));
 				result.add(m);
 			}
@@ -109,7 +113,7 @@ public class King extends Piece {
 		Board b = curr.getBoard();
 		int y = curr.getYCoord();
 		int x = curr.getXCoord();
-		Move m = new Move(b.getFieldAt(y, x + kingDestOffsetX), () -> {});
+		Move m = new Move(b.getFieldAt(y, x + kingDestOffsetX), (Callback & Serializable) () -> {});
 		m.addEffect(new MoveEffect(this, b.getFieldAt(y, x + kingDestOffsetX)));
 		m.addEffect(new MoveEffect(b.getFieldAt(y, rookCurrX).getPiece(), b.getFieldAt(y, rookDestX)));
 		result.add(m);

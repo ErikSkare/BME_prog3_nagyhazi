@@ -1,5 +1,6 @@
 package logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,8 +8,10 @@ import java.util.List;
  * @author Skáre Erik
  * Egy partit reprezentál.
  */
-public class Party {
+public class Party implements Serializable {
 	
+	private static final long serialVersionUID = 3737441359349151775L;
+
 	/**
 	 * Az parti lehetséges állapotai.
 	 */

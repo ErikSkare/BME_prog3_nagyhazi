@@ -1,10 +1,14 @@
 package logic;
 
+import java.io.Serializable;
+
 /**
  * @author Skáre Erik
  * Egy játékos.
  */
-abstract public class Player {
+abstract public class Player implements Serializable {
+	
+	private static final long serialVersionUID = 6599240901998206520L;
 	
 	/**
 	 * A parti, amit a játékos éppen játszik.

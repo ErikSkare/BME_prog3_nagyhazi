@@ -9,6 +9,8 @@ import logic.Piece;
 
 public class AddEffect extends Effect {
 	
+	private static final long serialVersionUID = -8371555093380855618L;
+	
 	/**
 	 * Ahova hozzáadódik a bábu.
 	 */

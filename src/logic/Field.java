@@ -1,11 +1,15 @@
 package logic;
 
+import java.io.Serializable;
+
 /**
  * @author Skáre Erik
  * Egy mező.
  */
-public class Field {
+public class Field implements Serializable {
 	
+	private static final long serialVersionUID = 5232594265694801915L;
+
 	/**
 	 * A tábla, amin a mező van.
 	 */

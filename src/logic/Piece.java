@@ -1,5 +1,6 @@
 package logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,8 +8,10 @@ import java.util.List;
  * @author Skáre Erik
  * Egy absztrakt bábu.
  */
-abstract public class Piece {
+abstract public class Piece implements Serializable {
 	
+	private static final long serialVersionUID = -6678099664988104827L;
+
 	/**
 	 * A mező, amin a bábu tartózkodik.
 	 */
@@ -29,6 +32,9 @@ abstract public class Piece {
 	 */
 	private List<Piece> capturedPool;
 	
+	/**
+	 * Lépett-e már a bábu.
+	 */
 	private boolean hasMoved;
 	
 	/**
@@ -91,6 +97,9 @@ abstract public class Piece {
 	 */
 	public final int getValue() { return this.value; }
 	
+	/**
+	 * @return A leütöttek listája.
+	 */
 	public final List<Piece> getCapturedPool() { return this.capturedPool; }
 	
 	/**
@@ -101,6 +110,9 @@ abstract public class Piece {
 		return this.getIsWhite() != p.getIsWhite();
 	}
 	
+	/**
+	 * @return Lépett-e már a bábu.
+	 */
 	public boolean getHasMoved() { return this.hasMoved; }
 	
 	/**

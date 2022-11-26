@@ -1,14 +1,18 @@
 package logic.pieces;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import logic.Field;
 import logic.Move;
 import logic.Piece;
+import logic.Move.Callback;
 import logic.effects.MoveEffect;
 
 public class Bishop extends Piece {
+
+	private static final long serialVersionUID = -7746783782119001111L;
 
 	public Bishop(Field field, boolean isWhite, int value, List<Piece> capturedPool) {
 		super(field, isWhite, value, capturedPool);
@@ -19,7 +23,7 @@ public class Bishop extends Piece {
 		ArrayList<Move> result = new ArrayList<Move>();
 		for(Field f : Utils.getDiagonalFields(this)) {
 			if(!f.hasPiece() || f.getPiece().canBeTaken(this)) {
-				Move m = new Move(f, () -> {});
+				Move m = new Move(f, (Callback & Serializable) () -> {});
 				m.addEffect(new MoveEffect(this, f));
 				result.add(m);
 			}

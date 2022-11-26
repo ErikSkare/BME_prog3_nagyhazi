@@ -9,6 +9,11 @@ import logic.Piece;
 
 public class RemoveEffect extends Effect {
 	
+	private static final long serialVersionUID = 4610838995513204908L;
+	
+	/**
+	 * A mező, ahol a bábu állt.
+	 */
 	private Field on;
 
 	public RemoveEffect(Piece piece) {

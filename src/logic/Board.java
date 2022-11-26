@@ -1,5 +1,6 @@
 package logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -18,8 +19,10 @@ import logic.pieces.Rook;
  * @author Skáre Erik
  * Egy tábla az aktuális állással.
  */
-public class Board {
+public class Board implements Serializable {
 	
+	private static final long serialVersionUID = 1918514707848647485L;
+
 	/**
 	 * A tábla mezői.
 	 */
@@ -33,7 +36,7 @@ public class Board {
 	/**
 	 * A tábla aktuális állapota (múltbeli vagy sem)
 	 */
-	private ListIterator<Move> pastMovesIt;
+	transient private ListIterator<Move> pastMovesIt;
 	
 	/**
 	 * A világos királya
@@ -45,11 +48,17 @@ public class Board {
 	 */
 	private King blackKing;
 	
+	/**
+	 * A gyalog promóciót megvalósító interfész.
+	 */
 	public interface Promotion {
 		public Piece getPiece(Pawn p);
 	}
 	
-	private Promotion promotion;
+	/**
+	 * Az aktuális promóció.
+	 */
+	transient private Promotion promotion;
 	
 	/**
 	 * Konstruktor
@@ -60,7 +69,6 @@ public class Board {
 		this.fields = new Field[8][8];
 		this.pastMoves = new LinkedList<Move>();
 		this.pastMovesIt = this.pastMoves.listIterator();
-		this.promotion = (p) -> new Queen(null, p.getIsWhite(), 9, p.getCapturedPool());
 		for(int i = 0; i < 8; ++i)
 			for(int j = 0; j < 8; ++j)
 				this.fields[i][j] = new Field(this, i, j, (i + j) % 2 == 0);
@@ -102,12 +110,23 @@ public class Board {
 	 */
 	public final Field getFieldAt(int y, int x) { return this.fields[y][x]; }
 	
+	/**
+	 * @param p gyalog.
+	 * @return A bábu, amivé a paraszt promótál.
+	 */
 	public final Piece getPromotionPiece(Pawn p) {
 		return this.promotion.getPiece(p);
 	}
 	
+	/**
+	 * @return Visszaadja a promóciót megvalósító interfészt.
+	 */
 	public final Promotion getPromotion() { return this.promotion; }
 	
+	/**
+	 * Beállítja a promócióhoz tartozó interfészt.
+	 * @param p a promóció.
+	 */
 	public final void setPromotion(Promotion p) { this.promotion = p; }
 	
 	/**
@@ -134,6 +153,13 @@ public class Board {
 	public final void addPastMove(Move m) { 
 		pastMoves.addFirst(m); 
 		pastMovesIt = pastMoves.listIterator();
+	}
+	
+	/**
+	 * Visszaállítja a már lépett lépéseket iterátorát a jelenbe.
+	 */
+	public final void resetPastMovesIt() {
+		this.pastMovesIt = this.pastMoves.listIterator();
 	}
 	
 	/**
@@ -165,6 +191,13 @@ public class Board {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * Visszapörgeti a lépéseket az aktuálisan következő lépéshez.
+	 */
+	public final void stepToNow() {
+		while(this.stepForward());
 	}
 	
 	/**

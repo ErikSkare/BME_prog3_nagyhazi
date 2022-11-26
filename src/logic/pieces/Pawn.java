@@ -1,11 +1,13 @@
 package logic.pieces;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import logic.Board;
 import logic.Field;
 import logic.Move;
+import logic.Move.Callback;
 import logic.Piece;
 import logic.effects.AddEffect;
 import logic.effects.MoveEffect;
@@ -17,6 +19,8 @@ import logic.effects.RemoveEffect;
  */
 public class Pawn extends Piece {
 	
+	private static final long serialVersionUID = -1467480266319352702L;
+
 	/**
 	 * Első lépés-e a gyaloggal.
 	 */
@@ -45,7 +49,7 @@ public class Pawn extends Piece {
 			Field to = b.getFieldAt(current.getYCoord() + mul * 2, current.getXCoord());
 			Field before = b.getFieldAt(current.getYCoord() + mul, current.getXCoord());
 			if(!to.hasPiece() && !before.hasPiece()) {
-				Move m = new Move(to, () -> { this.isFirstMove = false; this.enPassant = true; });
+				Move m = new Move(to, (Callback & Serializable) () -> { this.isFirstMove = false; this.enPassant = true; });
 				m.addEffect(new MoveEffect(this, to));
 				result.add(m);
 			}
@@ -59,7 +63,7 @@ public class Pawn extends Piece {
 					? b.getFieldAt(1, current.getXCoord())
 					: b.getFieldAt(6, current.getXCoord());
 			
-			Move m = new Move(frontOf, () -> { this.isFirstMove = false; this.enPassant = false; });
+			Move m = new Move(frontOf, (Callback & Serializable) () -> { this.isFirstMove = false; this.enPassant = false; });
 			if(current == canPromoteFrom) {
 				Piece promote = b.getPromotionPiece(this);
 				m.addEffect(new RemoveEffect(this));
@@ -73,14 +77,14 @@ public class Pawn extends Piece {
 		if(current.getXCoord() - 1 >= 0) {
 			Field leftCapture = b.getFieldAt(current.getYCoord() + mul, current.getXCoord() - 1);
 			if(leftCapture.hasPiece() && leftCapture.getPiece().canBeTaken(this)) {
-				Move m = new Move(leftCapture, () -> { this.isFirstMove = false; this.enPassant = false; });
+				Move m = new Move(leftCapture, (Callback & Serializable) () -> { this.isFirstMove = false; this.enPassant = false; });
 				m.addEffect(new MoveEffect(this, leftCapture));
 				result.add(m);
 			}
 			// En passant
 			Field enPassantLeft = b.getFieldAt(current.getYCoord(), current.getXCoord() - 1);
 			if(!leftCapture.hasPiece() && enPassantLeft.hasPiece() && enPassantLeft.getPiece().canTakeEnPassant()) {
-				Move m = new Move(leftCapture, () -> { this.isFirstMove = false; this.enPassant = false; });
+				Move m = new Move(leftCapture, (Callback & Serializable) () -> { this.isFirstMove = false; this.enPassant = false; });
 				m.addEffect(new MoveEffect(this, enPassantLeft));
 				m.addEffect(new MoveEffect(this, leftCapture));
 				result.add(m);
@@ -91,14 +95,14 @@ public class Pawn extends Piece {
 		if(current.getXCoord() + 1 < 8) {
 			Field rightCapture = b.getFieldAt(current.getYCoord() + mul, current.getXCoord() + 1);
 			if(rightCapture.hasPiece() && rightCapture.getPiece().canBeTaken(this)) {
-				Move m = new Move(rightCapture, () -> { this.isFirstMove = false; this.enPassant = false; });
+				Move m = new Move(rightCapture, (Callback & Serializable) () -> { this.isFirstMove = false; this.enPassant = false; });
 				m.addEffect(new MoveEffect(this, rightCapture));
 				result.add(m);
 			}
 			// En passant
 			Field enPassantRight = b.getFieldAt(current.getYCoord(), current.getXCoord() + 1);
 			if(!rightCapture.hasPiece() && enPassantRight.hasPiece() && enPassantRight.getPiece().canTakeEnPassant()) {
-				Move m = new Move(rightCapture, () -> { this.isFirstMove = false; this.enPassant = false; });
+				Move m = new Move(rightCapture, (Callback & Serializable) () -> { this.isFirstMove = false; this.enPassant = false; });
 				m.addEffect(new MoveEffect(this, enPassantRight));
 				m.addEffect(new MoveEffect(this, rightCapture));
 				result.add(m);
