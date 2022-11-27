@@ -99,7 +99,8 @@ public class LoadDialogView extends JDialog {
 			FileInputStream fis = null;
 			ObjectInputStream ois = null;
 			try {
-				fis = new FileInputStream(fileName);
+				File f = new File(MainFrame.searchDir, fileName);
+				fis = new FileInputStream(f);
 				ois = new ObjectInputStream(fis);
 				result = (Party) ois.readObject();
 			} catch (IOException | ClassNotFoundException e1) {
