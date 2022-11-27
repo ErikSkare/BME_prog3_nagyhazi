@@ -65,6 +65,8 @@ public class SaveDialogView extends JDialog {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			if(field.getText().equals(""))
+				return;
 			FileOutputStream fout = null;
 			ObjectOutputStream oos = null;;
 			try {

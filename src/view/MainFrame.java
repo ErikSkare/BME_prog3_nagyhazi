@@ -32,5 +32,6 @@ public class MainFrame extends JFrame {
 		}
 	      
 	    this.add(new PartyView(this, p));
+	    this.setJMenuBar(new MenuBar());
 	}
 }
