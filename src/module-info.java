@@ -7,4 +7,5 @@
  */
 module Nagyhazi {
 	requires java.desktop;
+	requires junit;
 }
