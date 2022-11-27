@@ -23,15 +23,22 @@ public class MainFrame extends JFrame {
 	
 	private JPanel deck;
 
+	@SuppressWarnings("deprecation")
 	public MainFrame() {
 		this.setSize(new Dimension(700, 600));
 		this.setResizable(false);
 		this.setLocationByPlatform(true);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		layout = new CardLayout();
 		deck = new JPanel(layout);
 	   
-	    this.setJMenuBar(new MenuBar(this));
+	    this.setJMenuBar(new MenuBar(this, (p) -> { 
+	    	current = new PartyView(this, p);
+	    	deck.add(current, "currentGame");
+	    	layout.show(deck, "currentGame");
+	    	current.requestDefaultFocus();
+	    }));
 	    this.add(deck);
 	    
 	    setNoGameState();
