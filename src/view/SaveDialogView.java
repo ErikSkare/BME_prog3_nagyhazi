@@ -18,7 +18,6 @@ import logic.Party;
 
 /**
  * @author Skáre Erik
- * A dialógus, amely egy parti mentéséért felelős.
  */
 public class SaveDialogView extends JDialog {
 
@@ -46,6 +45,7 @@ public class SaveDialogView extends JDialog {
 	private JButton close;
 
 	/**
+	 * Konstruktor
 	 * @param fr	a tartalmazó frame.
 	 * @param party	az elmentendő parti.
 	 */
@@ -74,6 +74,9 @@ public class SaveDialogView extends JDialog {
 		this.add(close);
 	}
 	
+	/**
+	 * A Dialog bezárását megvalósító logika.
+	 */
 	class OnClose implements ActionListener {
 
 		@Override
@@ -83,6 +86,9 @@ public class SaveDialogView extends JDialog {
 		
 	}
 	
+	/**
+	 * A mentés logikája.
+	 */
 	class OnSubmit implements ActionListener {
 
 		@Override

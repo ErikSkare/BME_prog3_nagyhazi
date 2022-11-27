@@ -17,7 +17,6 @@ import logic.pieces.Rook;
 
 /**
  * @author Skáre Erik
- * Egy partihoz tartozó nézet.
  */
 public class PartyView extends JPanel {
 	
@@ -48,6 +47,9 @@ public class PartyView extends JPanel {
 	 */
 	private JButton saveButton;
 	
+	/**
+	 * A bábuk, amivé egy gyalog promótálhat.
+	 */
 	enum Promotion {
 		BISHOP,
 		KNIGHT,
@@ -113,11 +115,13 @@ public class PartyView extends JPanel {
 	}
 	
 	/**
+	 * Megadja a partit, amit a nézet megjelenít.
 	 * @return A parti.
 	 */
 	public final Party getParty() { return this.party; }
 	
 	/**
+	 * Visszaadja a parti állapotát megjelenítő JLabel objektumot.
 	 * @return Az állapotot megjelenítő label.
 	 */
 	public final JLabel getStateText() { return this.stateText; }
@@ -150,6 +154,9 @@ public class PartyView extends JPanel {
 		}
 	}
 	
+	/**
+	 * A parti döntetlenné tevését megvalósító logika.
+	 */
 	class OnDrawButtonClick implements ActionListener {
 
 		@Override
@@ -161,6 +168,9 @@ public class PartyView extends JPanel {
 		
 	}
 	
+	/**
+	 * A promóciós bábu kiválasztásának logikáját valósítja meg.
+	 */
 	class ComboAction implements ActionListener {
 		
 		@Override
@@ -170,6 +180,9 @@ public class PartyView extends JPanel {
 		
 	}
 	
+	/**
+	 * A parti mentéséért felelős Dialogot nyitja meg.
+	 */
 	class SaveAction implements ActionListener {
 
 		@Override

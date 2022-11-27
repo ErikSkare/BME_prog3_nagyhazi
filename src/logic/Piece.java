@@ -6,7 +6,6 @@ import java.util.List;
 
 /**
  * @author Skáre Erik
- * Egy absztrakt bábu.
  */
 abstract public class Piece implements Serializable {
 	
@@ -38,6 +37,7 @@ abstract public class Piece implements Serializable {
 	private boolean hasMoved;
 	
 	/**
+	 * Konstruktor
 	 * @param field			mező
 	 * @param isWhite		fehér-e
 	 * @param value			érték
@@ -52,21 +52,26 @@ abstract public class Piece implements Serializable {
 	}
 	
 	/**
+	 * Visszaadja a bábu lehetséges lépéseit az adott pozícióból.
 	 * @return A lehetséges lépések.
 	 */
 	abstract public List<Move> getAvailableMoves();
 	
 	/**
-	 * @return Visszaadja a bábu által kontrollált mezőket.
+	 * Visszaadja a bábu által ellenőrzés alatt tartott mezőket.
+	 * @return A bábu által kontrollált mezőket.
 	 */
 	abstract public List<Field> getControlledFields();
 	
 	/**
+	 * Lekéri a bábut reprezentáló kép elérési útvonalát.
 	 * @return A kép elérési útvonala, amin a bábu van.
 	 */
 	abstract public String getImageSrc();
 	
 	/**
+	 * Megadja, hogy a bábu leüthető-e a speciális En Passant lépéssel.
+	 * Csak gyalognál van jelentősége.
 	 * @return Leüthető-e En passant lépéssel.
 	 */
 	public boolean canTakeEnPassant() { return false; }
@@ -77,32 +82,37 @@ abstract public class Piece implements Serializable {
 	public void forfeitEnPassant() { }
 	
 	/**
+	 * Megadja a mezőt, amin a bábu áll éppen.
 	 * @return A mező.
 	 */
 	public final Field getField() { return this.field; }
 	
 	/**
-	 * Beállítja a mezőt, amin a bábu van.
+	 * Beállítja a mezőt, amin a bábu tartózkodik éppen.
 	 * @param f mező.
 	 */
 	public final void setField(Field f) { this.field = f; }
 	
 	/**
+	 * Megadja, hogy a bábu világos színű-e.
 	 * @return Fehér-e.
 	 */
 	public final boolean getIsWhite() { return this.isWhite; }
 	
 	/**
+	 * Megadja a bábu értékét pontokban.
 	 * @return A bábu értéke.
 	 */
 	public final int getValue() { return this.value; }
 	
 	/**
+	 * Megadja a listát, ahova a bábu kerül ha leütik.
 	 * @return A leütöttek listája.
 	 */
 	public final List<Piece> getCapturedPool() { return this.capturedPool; }
 	
 	/**
+	 * Megadja, hogy egy adott bábu leütheti-e ezt a bábut.
 	 * @param p a leütést kezdeményező
 	 * @return Leüthető-e.
 	 */
@@ -111,6 +121,7 @@ abstract public class Piece implements Serializable {
 	}
 	
 	/**
+	 * Megadja, hogy a bábu lépett-e már.
 	 * @return Lépett-e már a bábu.
 	 */
 	public boolean getHasMoved() { return this.hasMoved; }
@@ -139,6 +150,7 @@ abstract public class Piece implements Serializable {
 	}
 	
 	/**
+	 * Kiszűri azokat a lépéseket, amelyek eredményeként a király sakkban lenne.
 	 * @param moves a lépések.
 	 * @return Azok a lépések, amelyek után a király nem lesz sakkban.
 	 */

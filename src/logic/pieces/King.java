@@ -14,17 +14,24 @@ import logic.effects.MoveEffect;
 
 /**
  * @author Skáre Erik
- * Egy király bábut megvalósító osztály.
  */
 public class King extends Piece {
 
 	private static final long serialVersionUID = 5801691492923319881L;
 
+	/**
+	 * Konstruktor
+	 * @param field			a mező, amin a bábu tartózkodik.
+	 * @param isWhite		fehér-e.
+	 * @param value			a bábu értéke.
+	 * @param capturedPool	a lista, ahova kerül ha leütik.
+	 */
 	public King(Field field, boolean isWhite, int value, List<Piece> capturedPool) {
 		super(field, isWhite, value, capturedPool);
 	}
 	
 	/**
+	 * Megadja, hogy sakkban van-e éppen a király.
 	 * @return Sakkban van-e a király.
 	 */
 	public final boolean isInCheck() {
@@ -74,6 +81,11 @@ public class King extends Piece {
 		return false;
 	}
 	
+	/**
+	 * Megadja, hogy az adott irányba tud-e sáncolni a király.
+	 * @param toRight jobbra-e.
+	 * @return Tud-e sáncolni.
+	 */
 	private boolean canCastle(boolean toRight) {
 		// Király nem mozgott és nincs sakkban
 		if(this.getHasMoved() || this.isInCheck())
@@ -107,6 +119,11 @@ public class King extends Piece {
 		return flag;
 	}
 	
+	/**
+	 * Ha az adott irányba tud sáncolni a bábu, akkor hozzáadja a lépések listájához.
+	 * @param toRight jobbra-e.
+	 * @param result a lista, ahova hozzáadja a lépést.
+	 */
 	private void addCastling(boolean toRight, ArrayList<Move> result) {
 		if(!this.canCastle(toRight))
 			return;

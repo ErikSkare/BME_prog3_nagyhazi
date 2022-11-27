@@ -4,7 +4,6 @@ import logic.Player;
 
 /**
  * @author Skáre Erik
- * Egy ember játékos.
  */
 public class RealPlayer extends Player {
 	
@@ -16,6 +15,7 @@ public class RealPlayer extends Player {
 	private boolean canStep;
 
 	/**
+	 * Konstruktor
 	 * @param isWhite világossal játszik-e.
 	 */
 	public RealPlayer(boolean isWhite) {

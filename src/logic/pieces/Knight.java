@@ -12,12 +12,18 @@ import logic.effects.MoveEffect;
 
 /**
  * @author Skáre Erik
- * Egy ló bábut megvalósító osztály.
  */
 public class Knight extends Piece {
 
 	private static final long serialVersionUID = -5424546512612778382L;
 
+	/**
+	 * Konstruktor
+	 * @param field			a mező, amin a bábu tartózkodik.
+	 * @param isWhite		fehér-e.
+	 * @param value			a bábu értéke.
+	 * @param capturedPool	a lista, ahova kerül ha leütik.
+	 */
 	public Knight(Field field, boolean isWhite, int value, List<Piece> capturedPool) {
 		super(field, isWhite, value, capturedPool);
 	}

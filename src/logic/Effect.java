@@ -5,7 +5,6 @@ import java.util.List;
 
 /**
  * @author Skáre Erik
- * Csinál valamit a táblán egy bábuval.
  */
 abstract public class Effect implements Serializable {
 	
@@ -30,11 +29,13 @@ abstract public class Effect implements Serializable {
 	abstract public void run();
 	
 	/**
-	 * @return Visszaadja az effekt megfordítását.
+	 * Megfordítja az effektet, végrehajtva az ellenkezője fog történni.
+	 * @return Az effekt megfordítása.
 	 */
 	abstract public List<Effect> reverse();
 	
 	/**
+	 * Megadja a bábut, amin az effekt hajtódik végre.
 	 * @return A bábu.
 	 */
 	public final Piece getPiece() { return this.piece; }

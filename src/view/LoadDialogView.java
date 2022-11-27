@@ -18,7 +18,6 @@ import logic.Party;
 
 /**
  * @author Skáre Erik
- * Dialógus, amivel játékot lehet betölteni.
  */
 public class LoadDialogView extends JDialog {
 
@@ -52,6 +51,7 @@ public class LoadDialogView extends JDialog {
 	private JButton cancel;
 	
 	/**
+	 * Konstruktor
 	 * @param fr a tartalmazó frame.
 	 * @param cb callback.
 	 */
@@ -90,6 +90,9 @@ public class LoadDialogView extends JDialog {
 		this.add(cancel);
 	}
 	
+	/**
+	 * A parti fájlból beolvasásának logikáját valósítja meg.
+	 */
 	class OnLoadRequest implements ActionListener {
 
 		@Override

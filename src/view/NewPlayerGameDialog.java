@@ -14,7 +14,6 @@ import logic.players.RealPlayer;
 
 /**
  * @author Skáre Erik
- * A dialógus, ami egy új játékos vs játékos partit hoz létre.
  */
 public class NewPlayerGameDialog extends JDialog {
 
@@ -33,6 +32,7 @@ public class NewPlayerGameDialog extends JDialog {
 	private Callback cb;
 
 	/**
+	 * Konstruktor
 	 * @param fr a tartalmazó frame.
 	 * @param cb callback.
 	 */
@@ -58,6 +58,9 @@ public class NewPlayerGameDialog extends JDialog {
 		this.add(cancel);
 	}
 	
+	/**
+	 * A játék indításának logikáját valósítja meg.
+	 */
 	class OnNewGame implements ActionListener {
 
 		@Override

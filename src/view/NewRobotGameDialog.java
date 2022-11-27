@@ -15,7 +15,6 @@ import logic.players.RobotPlayer;
 
 /**
  * @author Skáre Erik
- * A dialógus, amivel egy új robot vs játékos partit lehet elindítani.
  */
 public class NewRobotGameDialog extends JDialog {
 
@@ -57,6 +56,7 @@ public class NewRobotGameDialog extends JDialog {
 	private JButton cancel;
 	
 	/**
+	 * Konstruktor
 	 * @param fr a tartalmazó frame.
 	 * @param cb callback.
 	 */
@@ -74,7 +74,7 @@ public class NewRobotGameDialog extends JDialog {
 		this.submit = new JButton("Start");
 		this.cancel = new JButton("Cancel");
 		
-		this.submit.addActionListener(new OnCreateGame());
+		this.submit.addActionListener(new OnNewGame());
 		this.submit.addActionListener((e) -> { setVisible(false); });
 		
 		this.cancel.addActionListener((e) -> { setVisible(false); });
@@ -84,7 +84,10 @@ public class NewRobotGameDialog extends JDialog {
 		this.add(cancel);
 	}
 	
-	class OnCreateGame implements ActionListener {
+	/**
+	 * A játék indításának logikáját valósítja meg.
+	 */
+	class OnNewGame implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {

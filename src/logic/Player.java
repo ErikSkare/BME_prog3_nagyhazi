@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 /**
  * @author Skáre Erik
- * Egy játékos.
  */
 abstract public class Player implements Serializable {
 	
@@ -21,6 +20,7 @@ abstract public class Player implements Serializable {
 	private boolean isWhite;
 	
 	/**
+	 * Konstruktor
 	 * @param isWhite világossal játszik-e.
 	 */
 	public Player(boolean isWhite) {
@@ -40,21 +40,25 @@ abstract public class Player implements Serializable {
 	abstract public void resignStepPermission();
 	
 	/**
+	 * Megadja, hogy a játékosnak éppen van-e joga lépni.
 	 * @return A lépési jog megléte.
 	 */
 	abstract public boolean hasStepPermission();
 	
 	/**
+	 * Megadja a partit, amiben a játékos játszik.
 	 * @return A 'playing' attribútum értéke.
 	 */
 	public final Party getPlaying() { return this.playing; }
 	
 	/**
+	 * Beállítja a partit, amiben a játékos játszik.
 	 * @param p A 'playing' attribútum új értéke.
 	 */
 	public final void setPlaying(Party p) { this.playing = p; }
 	
 	/**
+	 * Megadja, hogy a játékos a világos bábukkal játszik-e vagy sem.
 	 * @return Az 'isWhite' attribútum értéke.
 	 */
 	public final boolean getIsWhite() { return this.isWhite; }

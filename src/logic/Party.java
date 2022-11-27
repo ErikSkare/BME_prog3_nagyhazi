@@ -6,7 +6,6 @@ import java.util.List;
 
 /**
  * @author Skáre Erik
- * Egy partit reprezentál.
  */
 public class Party implements Serializable {
 	
@@ -52,7 +51,13 @@ public class Party implements Serializable {
 	 */
 	private List<Piece> blackCapturedPool;
 	
+	/**
+	 * A változásra feliratkozást megvalósító interfész.
+	 */
 	public interface ChangeListener {
+		/**
+		 * A változás hatására történik valami.
+		 */
 		public void run();
 	}
 	
@@ -62,6 +67,7 @@ public class Party implements Serializable {
 	transient private List<ChangeListener> changeListeners;
 	
 	/**
+	 * Konstruktor
 	 * @param p1 első játékos.
 	 * @param p2 második játékos.
 	 */
@@ -76,6 +82,7 @@ public class Party implements Serializable {
 	}
 	
 	/**
+	 * Megadja a világossal játszó játékost.
 	 * @return A 'white' attribútum értéke.
 	 */
 	public final Player getWhite() { 
@@ -84,6 +91,7 @@ public class Party implements Serializable {
 	}
 	
 	/**
+	 * Megadja a sötéttel játszó játékost.
 	 * @return A 'black' attribútum értéke.
 	 */
 	public final Player getBlack() { 
@@ -100,6 +108,7 @@ public class Party implements Serializable {
 	}
 	
 	/**
+	 * Megadja az éppen lépő játékost, ha van ilyen.
 	 * @return Az aktuálisan lépő játékos, vagy null ha nincs.
 	 */
 	public final Player getCurrentPlayer() {
@@ -127,6 +136,7 @@ public class Party implements Serializable {
 	}
 	
 	/**
+	 * Megadja, hogy az éppen lépő játékos a világos-e.
 	 * @return Világos-e a következő.
 	 */
 	public final boolean getIsWhiteCurrent() {
@@ -134,11 +144,13 @@ public class Party implements Serializable {
 	}
 	
 	/**
+	 * Megadja a partihoz tartozó táblát.
 	 * @return A 'board' attribútum értéke.
 	 */
 	public final Board getBoard() { return this.board; }
 	
 	/**
+	 * Megadja a parti aktuális állapotát.
 	 * @return A 'partyState' attribútum értéke.
 	 */
 	public final Party.State getPartyState() { return this.partyState; }

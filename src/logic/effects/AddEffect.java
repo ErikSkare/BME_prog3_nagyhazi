@@ -9,7 +9,6 @@ import logic.Piece;
 
 /**
  * @author Skáre Erik
- * Olyan effekt, ami hozzáad egy bábut egy mezőhöz.
  */
 public class AddEffect extends Effect {
 	

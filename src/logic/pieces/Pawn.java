@@ -15,7 +15,6 @@ import logic.effects.RemoveEffect;
 
 /**
  * @author Skáre Erik
- * Egy gyalog bábu.
  */
 public class Pawn extends Piece {
 	
@@ -31,9 +30,32 @@ public class Pawn extends Piece {
 	 */
 	private boolean enPassant;
 
+	/**
+	 * Konstruktor
+	 * @param field			a mező, amin a bábu tartózkodik.
+	 * @param isWhite		fehér-e.
+	 * @param value			a bábu értéke.
+	 * @param capturedPool	a lista, ahova kerül ha leütik.
+	 */
 	public Pawn(Field field, boolean isWhite, int value, List<Piece> capturedPool) {
 		super(field, isWhite, value, capturedPool);
 		this.isFirstMove = true;
+		this.enPassant = false;
+	}
+	
+	/**
+	 * Megadja, hogy a bábu leüthető-e En Passant lépéssel.
+	 * @return leüthető-e En Passant-al.
+	 */
+	public boolean canTakeEnPassant() {
+		return this.enPassant;
+	}
+	
+	/**
+	 * Ha az ellenfél nem él az En Passant lépés lehetőségével, akkor
+	 * hívódik meg.
+	 */
+	public void forfeitEnPassant() {
 		this.enPassant = false;
 	}
 
@@ -147,14 +169,6 @@ public class Pawn extends Piece {
 			return "pictures/white_pawn.png";
 		else
 			return "pictures/black_pawn.png";
-	}
-	
-	public boolean canTakeEnPassant() {
-		return this.enPassant;
-	}
-	
-	public void forfeitEnPassant() {
-		this.enPassant = false;
 	}
 
 }

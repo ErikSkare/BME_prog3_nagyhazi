@@ -6,12 +6,26 @@ import logic.Board;
 import logic.Field;
 import logic.Piece;
 
+/**
+ * @author Skáre Erik
+ */
 public class Utils {
 	
+	/**
+	 * Megadja, hogy egy adott mezőből hogyan kapható meg a következő.
+	 * Ezzel írja le pl. a diagonális lépéseket.
+	 */
 	public static interface Transition {
 		public Field run(Field f);
 	}
 	
+	/**
+	 * Visszaadja egy adott bábutól kiindulva az összes átmenettel definiált mezőt,
+	 * egészen addig, amíg egy foglalt mezőhöz ér.
+	 * @param p az adott bábu.
+	 * @param t az átmenet.
+	 * @return Az összes feltételnek megfelelő mező.
+	 */
 	public static ArrayList<Field> getFieldsUntil(Piece p, Transition t) {
 		ArrayList<Field> result = new ArrayList<Field>();
 		
@@ -26,6 +40,12 @@ public class Utils {
 		return result;
 	}
 	
+	/**
+	 * Megadja egy adott bábuhoz a sorában és oszlopában elhelyezkedő mezőket.
+	 * (nem feltétlen végig, csak addig amíg nem ér egy foglalt mezőhöz)
+	 * @param p a bábu.
+	 * @return Az összes feltételnek megfelelő mező.
+	 */
 	public static ArrayList<Field> getStraightFields(Piece p) {
 		ArrayList<Field> result = new ArrayList<Field>();
 		Board b = p.getField().getBoard();
@@ -62,6 +82,12 @@ public class Utils {
 		return result;
 	}
 	
+	/**
+	 * Megadja egy adott bábuhoz az átlósan elhelyezkedő mezőket.
+	 * (nem feltétlen végig, csak addig amíg nem ér egy foglalt mezőhöz)
+	 * @param p a bábu.
+	 * @return Az összes feltételnek megfelelő mező.
+	 */
 	public static ArrayList<Field> getDiagonalFields(Piece p) {
 		ArrayList<Field> result = new ArrayList<Field>();
 		Board b = p.getField().getBoard();
@@ -98,6 +124,14 @@ public class Utils {
 		return result;
 	}
 	
+	/**
+	 * Egy, az adott bábuhoz relatív elhelyezkedő mezőt ad vissza.
+	 * (ló lépéseinél hasznos)
+	 * @param p a bábu.
+	 * @param dy Y koordinátabeli eltérés.
+	 * @param dx X koordinátabeli eltérés.
+	 * @return
+	 */
 	public static Field getFieldRelative(Piece p, int dy, int dx) {
 		Field where = p.getField();
 		Board b = where.getBoard();

@@ -17,7 +17,6 @@ import logic.pieces.Rook;
 
 /**
  * @author Skáre Erik
- * Egy tábla az aktuális állással.
  */
 public class Board implements Serializable {
 	
@@ -52,6 +51,11 @@ public class Board implements Serializable {
 	 * A gyalog promóciót megvalósító interfész.
 	 */
 	public interface Promotion {
+		/**
+		 * Megadja az adott gyaloghoz tartozó promóciós bábut.
+		 * @param p a gyalog.
+		 * @return A promóciós bábu.
+		 */
 		public Piece getPiece(Pawn p);
 	}
 	
@@ -61,7 +65,7 @@ public class Board implements Serializable {
 	transient private Promotion promotion;
 	
 	/**
-	 * Konstruktor
+	 * Konstruktor, kezdeti állapotba állítja a táblát.
 	 * @param whiteCapturedPool világos által leütöttek.
 	 * @param blackCapturedPool sötét által leütöttek.
 	 */
@@ -104,6 +108,7 @@ public class Board implements Serializable {
 	}
 	
 	/**
+	 * Egy adott koordinátájú mezőt ad vissza.
 	 * @param y vertikális pozíció.
 	 * @param x horizontális pozíció.
 	 * @return A pozíción lévő mező.
@@ -111,6 +116,7 @@ public class Board implements Serializable {
 	public final Field getFieldAt(int y, int x) { return this.fields[y][x]; }
 	
 	/**
+	 * Visszaadja a megadott gyaloghoz tartozó promóciós bábut.
 	 * @param p gyalog.
 	 * @return A bábu, amivé a paraszt promótál.
 	 */
@@ -119,7 +125,8 @@ public class Board implements Serializable {
 	}
 	
 	/**
-	 * @return Visszaadja a promóciót megvalósító interfészt.
+	 * Visszaadja a promóciót megvalósító interfészt.
+	 * @return A promóciót megvalósító interfész.
 	 */
 	public final Promotion getPromotion() { return this.promotion; }
 	
@@ -130,6 +137,7 @@ public class Board implements Serializable {
 	public final void setPromotion(Promotion p) { this.promotion = p; }
 	
 	/**
+	 * Megadja a tábla aktuális állapotát, ha egy adott szín következik.
 	 * @param isWhiteNext fehér következik-e.
 	 * @return Az aktuális állapot.
 	 */
@@ -163,6 +171,7 @@ public class Board implements Serializable {
 	}
 	
 	/**
+	 * Visszaadja a múltbeli lépéseket tároló listát.
 	 * @return Az eddigi lépések.
 	 */
 	public final LinkedList<Move> getPastMoves() { return this.pastMoves; }
@@ -201,6 +210,8 @@ public class Board implements Serializable {
 	}
 	
 	/**
+	 * Megadja, hogy a tábla az aktuális állásnál van, vagy múltbeli
+	 * állásokat nézegetünk éppen.
 	 * @return A legutóbbi állást kezeljük-e.
 	 */
 	public final boolean isInNow() {
@@ -208,6 +219,7 @@ public class Board implements Serializable {
 	}
 	
 	/**
+	 * Megadja az adott szín által kontrollált összes mezőt.
 	 * @param isWhite fehér-e.
 	 * @return Az összes adott szín által kontrollált mező.
 	 */
@@ -224,6 +236,7 @@ public class Board implements Serializable {
 	}
 	
 	/**
+	 * Megadja az adott színhez tartozó királyt.
 	 * @param isWhite fehér-e.
 	 * @return Az adott szín királya.
 	 */
@@ -235,6 +248,7 @@ public class Board implements Serializable {
 	}
 	
 	/**
+	 * Megadja, hogy a megadott játékos tud-e lépni az aktuális állásból.
 	 * @param isWhite fehér-e.
 	 * @return Van-e legális lépése a megadott színnek.
 	 */

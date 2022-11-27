@@ -12,12 +12,18 @@ import logic.effects.MoveEffect;
 
 /**
  * @author Skáre Erik
- * Egy futó bábut megvalósító osztály.
  */
 public class Bishop extends Piece {
 
 	private static final long serialVersionUID = -7746783782119001111L;
 
+	/**
+	 * Konstruktor
+	 * @param field			a mező, amin a bábu tartózkodik.
+	 * @param isWhite		fehér-e.
+	 * @param value			a bábu értéke.
+	 * @param capturedPool	a lista, ahova kerül ha leütik.
+	 */
 	public Bishop(Field field, boolean isWhite, int value, List<Piece> capturedPool) {
 		super(field, isWhite, value, capturedPool);
 	}

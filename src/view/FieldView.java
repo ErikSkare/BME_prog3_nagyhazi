@@ -17,7 +17,6 @@ import logic.Move;
 
 /**
  * @author Skáre Erik
- * Egy mezőhöz tartozó nézet.
  */
 public class FieldView extends JPanel {
 	
@@ -39,6 +38,7 @@ public class FieldView extends JPanel {
 	private Move move;
 	
 	/**
+	 * Konstruktor
 	 * @param field		a mező.
 	 * @param partyView	a nézet.
 	 */
@@ -51,11 +51,14 @@ public class FieldView extends JPanel {
 	}
 	
 	/**
+	 * Visszaadja a mezőt, amit ez a nézet megjelenít.
 	 * @return A mező.
 	 */
 	public final Field getField() { return this.field; }
 	
 	/**
+	 * Beállítja a mezőhöz tartozó lépést.
+	 * (ami éppen meg van jelenítve)
 	 * @param m az aktuális lépés.
 	 */
 	public final void setMove(Move m) { 
@@ -63,6 +66,7 @@ public class FieldView extends JPanel {
 	}
 	
 	/**
+	 * Megadja, hogy a mezőhöz most tartozik-e lépés.
 	 * @return Tartozik-e a mezőhöz lépés.
 	 */
 	public final boolean isMoveable() { return this.move != null; }
@@ -88,6 +92,9 @@ public class FieldView extends JPanel {
 		}
 	}
 	
+	/**
+	 * A mezőre kattintás logikáját valósítja meg.
+	 */
 	class OnClickAction implements MouseListener {
 
 		@Override

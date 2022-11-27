@@ -9,7 +9,6 @@ import logic.Piece;
 
 /**
  * @author Skáre Erik
- * Olyan effekt, amely töröl egy bábut.
  */
 public class RemoveEffect extends Effect {
 	
@@ -21,6 +20,7 @@ public class RemoveEffect extends Effect {
 	private Field on;
 
 	/**
+	 * Konstruktor
 	 * @param piece a törlendő bábu.
 	 */
 	public RemoveEffect(Piece piece) {

@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 /**
  * @author Skáre Erik
- * Egy mező.
  */
 public class Field implements Serializable {
 	
@@ -51,31 +50,37 @@ public class Field implements Serializable {
 	}
 	
 	/**
+	 * Megadja a mezőhöz tartozó bábut.
 	 * @return A tábla.
 	 */
 	public final Board getBoard() { return this.board; }
 	
 	/**
+	 * Megadja a mező elhelyezkedésének Y koordinátáját.
 	 * @return A vertikális pozíció.
 	 */
 	public final int getYCoord() { return this.yCoord; }
 	
 	/**
+	 * Megadja a mező elhelyezkedésének X koordinátáját.
 	 * @return A horizontális pozíció.
 	 */
 	public final int getXCoord() { return this.xCoord; }
 	
 	/**
+	 * Megadja, hogy a mező fehér színű-e.
 	 * @return Fehér-e.
 	 */
 	public final boolean getIsWhite() { return this.isWhite; }
 	
 	/**
+	 * Megadja a mezőn állú bábut, vagy null-t ha nincs ilyen.
 	 * @return A bábu.
 	 */
 	public final Piece getPiece() { return this.piece; }
 	
 	/**
+	 * Megadja, hogy van-e bábu a mezőn.
 	 * @return Van-e rajta bábu.
 	 */
 	public final boolean hasPiece() { return this.piece != null; }

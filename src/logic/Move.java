@@ -6,12 +6,14 @@ import java.util.List;
 
 /**
  * @author Skáre Erik
- * Egy lehetséges lépés, az effektjeivel.
  */
 public class Move implements Serializable {
 	
 	private static final long serialVersionUID = -2104860860316278513L;
 
+	/**
+	 * A lépés utáni történéseket valósítja meg.
+	 */
 	public interface Callback {
 		public void call();
 	}
@@ -43,11 +45,13 @@ public class Move implements Serializable {
 	}
 	
 	/**
+	 * Visszadja azt a mezőt, amely meghatározza az adott lépést.
 	 * @return A lépést jelző mező.
 	 */
 	public final Field getIndicator() { return this.indicator; }
 	
 	/**
+	 * Hozzáadja az effektet a lépéshez.
 	 * @param e az új effekt
 	 */
 	public void addEffect(Effect e) {

@@ -9,7 +9,6 @@ import logic.Piece;
 
 /**
  * @author Skáre Erik
- * Olyan effekt, ami egy bábut léptet.
  */
 public class MoveEffect extends Effect {
 	
@@ -43,6 +42,7 @@ public class MoveEffect extends Effect {
 	}
 	
 	/**
+	 * Megadja, hogy melyik mezőre lép a bábu.
 	 * @return A mező, ahova lép.
 	 */
 	public final Field getTo() { return this.to; }

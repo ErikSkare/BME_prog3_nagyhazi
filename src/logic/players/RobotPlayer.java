@@ -12,31 +12,50 @@ import logic.Player;
 
 /**
  * @author Skáre Erik
- * Egy robot játékos, aki véletlenszerűen lép.
  */
 public class RobotPlayer extends Player {
 
 	private static final long serialVersionUID = -1716132081207932133L;
 
 	/**
-	 * Egy bábuhoz tartozó lépés.
+	 * Egy bábu és egy hozzá tartozó lépés párt definiál.
 	 */
 	class PieceMove {
+		/**
+		 * A bábu.
+		 */
 		private Piece p;
 		
+		/**
+		 * A hozzá tartozó lépés.
+		 */
 		private Move m;
 		
+		/**
+		 * Konstruktor
+		 * @param p a bábu.
+		 * @param m a lépés.
+		 */
 		public PieceMove(Piece p, Move m) {
 			this.p = p;
 			this.m = m;
 		}
 		
+		/**
+		 * Visszaadja a bábut.
+		 * @return A bábu.
+		 */
 		public final Piece getPiece() { return this.p; }
 		
+		/**
+		 * Visszaadja a lépést.
+		 * @return A lépés.
+		 */
 		public final Move getMove() { return this.m; }
 	}
 	
 	/**
+	 * Konstruktor
 	 * @param isWhite világossal játszik-e.
 	 */
 	public RobotPlayer(boolean isWhite) {

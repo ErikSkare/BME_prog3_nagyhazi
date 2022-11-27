@@ -13,7 +13,6 @@ import logic.Party;
 
 /**
  * @author Skáre Erik
- * Az főablak.
  */
 public class MainFrame extends JFrame {
 	
@@ -39,6 +38,9 @@ public class MainFrame extends JFrame {
 	 */
 	private JPanel deck;
 
+	/**
+	 * Konstruktor
+	 */
 	public MainFrame() {
 		this.setSize(new Dimension(700, 600));
 		this.setResizable(false);
@@ -68,6 +70,10 @@ public class MainFrame extends JFrame {
 		deck.add(panel, "noGame");
 	}
 	
+	/**
+	 * Beállítja az éppen zajló partit a megadott partira.
+	 * @param p a parti.
+	 */
 	@SuppressWarnings("deprecation")
 	private void setCurrentGame(Party p) {
 		current = new PartyView(MainFrame.this, p);

@@ -14,7 +14,6 @@ import logic.Player;
 
 /**
  * @author Skáre Erik
- * A táblához tartozó nézet.
  */
 public class BoardView extends JPanel {
 	
@@ -55,6 +54,7 @@ public class BoardView extends JPanel {
 	private PartyView partyView;
 	
 	/**
+	 * Konstruktor
 	 * @param board			a tábla.
 	 * @param partyView		a parti nézete.
 	 */
@@ -78,26 +78,32 @@ public class BoardView extends JPanel {
 	}
 	
 	/**
+	 * Visszaadja a táblát, amit megjelenít ez a nézet.
 	 * @return A tábla, amit megjelenít.
 	 */
 	public final Board getBoard() { return this.board; }
 	
 	/**
+	 * Visszaadja az éppen gondolkodó/lépő játékost.
 	 * @return Az éppen lépő játékos.
 	 */
 	public final Player getMovingPlayer() { return this.partyView.getParty().getCurrentPlayer(); }
 	
 	/**
+	 * Visszaadja a tábla nézet aktuális állapotát.
+	 * (azaz éppen gondolkodik a játékos, vagy már kiválasztotta a bábut, amivel lép)
 	 * @return Az aktuális állapot.
 	 */
 	public final State getState() { return this.state; }
 	
 	/**
+	 * Visszaadja a bábut, amivel a játékos lépni tervez.
 	 * @return Az éppen aktív bábu.
 	 */
 	public final Piece getActivePiece() { return this.activePiece; }
 	
 	/**
+	 * Visszaadja a táblához tartozó parti nézetét.
 	 * @return A parti nézete.
 	 */
 	public final PartyView getPartyView() { return this.partyView; }
@@ -128,6 +134,9 @@ public class BoardView extends JPanel {
 		this.repaint();
 	}
 	
+	/**
+	 * Listener, az időbeli mozgást valósítja meg.
+	 */
 	class OnKeyPress implements KeyListener {
 
 		@Override

@@ -12,12 +12,18 @@ import logic.effects.MoveEffect;
 
 /**
  * @author Skáre Erik
- * Egy királynő bábut megvalósító osztály.
  */
 public class Queen extends Piece {
 
 	private static final long serialVersionUID = -6281792824191680491L;
 
+	/**
+	 * Konstruktor
+	 * @param field			a mező, amin a bábu tartózkodik.
+	 * @param isWhite		fehér-e.
+	 * @param value			a bábu értéke.
+	 * @param capturedPool	a lista, ahova kerül ha leütik.
+	 */
 	public Queen(Field field, boolean isWhite, int value, List<Piece> capturedPool) {
 		super(field, isWhite, value, capturedPool);
 	}
