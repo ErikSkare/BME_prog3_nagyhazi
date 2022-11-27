@@ -73,6 +73,10 @@ public class PartyView extends JPanel {
 		this.party.getBoard().resetPastMovesIt();
 		
 		this.boardView = new BoardView(party.getBoard(), this);
+		this.party.resetChangeListeners();
+		this.party.addChangeListener(() -> {
+			this.boardView.repaint();
+		});
 		
 		this.stateText = new JLabel(this.party.getPartyState().toString());
 		this.stateText.setHorizontalAlignment(JLabel.CENTER);

@@ -15,11 +15,14 @@ abstract public class Player implements Serializable {
 	 */
 	private Party playing;
 	
+	private boolean isWhite;
+	
 	/**
 	 * @param playing a parti
 	 */
-	public Player() {
+	public Player(boolean isWhite) {
 		this.playing = null;
+		this.isWhite = isWhite;
 	}
 	
 	/**
@@ -47,5 +50,7 @@ abstract public class Player implements Serializable {
 	 * @param p A 'playing' attribútum új értéke.
 	 */
 	public final void setPlaying(Party p) { this.playing = p; }
+	
+	public final boolean getIsWhite() { return this.isWhite; }
 	
 }

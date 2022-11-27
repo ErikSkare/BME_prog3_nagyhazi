@@ -18,8 +18,8 @@ public class RealPlayer extends Player {
 	/**
 	 * @param playing a parti, amit játszik.
 	 */
-	public RealPlayer() {
-		super();
+	public RealPlayer(boolean isWhite) {
+		super(isWhite);
 		this.canStep = false;
 	}
 

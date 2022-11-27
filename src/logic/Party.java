@@ -23,14 +23,14 @@ public class Party implements Serializable {
 	}
 	
 	/**
-	 * A világossal játszó játékos.
+	 * Az egyik játékos
 	 */
-	private Player white;
+	private Player p1;
 	
 	/**
-	 * A sötéttel játszó játékos.
+	 * A másik játékos
 	 */
-	private Player black;
+	private Player p2;
 	
 	/**
 	 * A tábla, amin a játék zajlik.
@@ -52,47 +52,71 @@ public class Party implements Serializable {
 	 */
 	private List<Piece> blackCapturedPool;
 	
+	public interface ChangeListener {
+		public void run();
+	}
+	
+	transient private List<ChangeListener> changeListeners;
+	
 	/**
 	 * @param white világos.
 	 * @param black sötét.
 	 */
-	public Party(Player white, Player black) {
-		this.white = white;
-		this.black = black;
+	public Party(Player p1, Player p2) {
+		this.p1 = p1;
+		this.p2 = p2;
 		this.partyState = Party.State.ONGOING;
 		this.whiteCapturedPool = new ArrayList<Piece>();
 		this.blackCapturedPool = new ArrayList<Piece>();
 		this.board = new Board(whiteCapturedPool, blackCapturedPool);
-		white.grantStepPermission();
+		this.changeListeners = new ArrayList<ChangeListener>();
 	}
 	
 	/**
 	 * @return A 'white' attribútum értéke.
 	 */
-	public final Player getWhite() { return this.white; }
+	public final Player getWhite() { 
+		if(p1.getIsWhite()) return p1;
+		else return p2;
+	}
 	
 	/**
 	 * @return A 'black' attribútum értéke.
 	 */
-	public final Player getBlack() { return this.black; }
+	public final Player getBlack() { 
+		if(!p1.getIsWhite()) return p1;
+		else return p2;
+	}
+	
+	public final void startMatch() {
+		getWhite().grantStepPermission();
+	}
 	
 	/**
 	 * @return Az aktuálisan lépő játékos, vagy null ha nincs.
 	 */
 	public final Player getCurrentPlayer() {
-		if(!white.hasStepPermission() && !black.hasStepPermission())
+		if(!getWhite().hasStepPermission() && !getBlack().hasStepPermission())
 			return null;
 		if(getIsWhiteCurrent())
-			return white;
+			return getWhite();
 		else
-			return black;
+			return getBlack();
+	}
+	
+	public final void addChangeListener(ChangeListener l) {
+		this.changeListeners.add(l);
+	}
+	
+	public final void resetChangeListeners() {
+		this.changeListeners = new ArrayList<ChangeListener>();
 	}
 	
 	/**
 	 * @return Világos-e a következő.
 	 */
 	public final boolean getIsWhiteCurrent() {
-		return white.hasStepPermission();
+		return getWhite().hasStepPermission();
 	}
 	
 	/**
@@ -110,17 +134,19 @@ public class Party implements Serializable {
 	 * @param by a visszaadó játékos.
 	 */
 	public void returnStepPermission(Player by) {
+		for(ChangeListener l : changeListeners)
+			l.run();
 		if(this.partyState != Party.State.ONGOING)
 			return;
-		boolean isWhiteNext = (by == this.black);
+		boolean isWhiteNext = (by == this.getBlack());
 		Party.State state = this.board.getCurrentState(isWhiteNext);
 		this.partyState = state;
 		if(state != Party.State.ONGOING)
 			return;
 		if(isWhiteNext)
-			this.white.grantStepPermission();
+			this.getWhite().grantStepPermission();
 		else
-			this.black.grantStepPermission();
+			this.getBlack().grantStepPermission();
 	}
 	
 	/**

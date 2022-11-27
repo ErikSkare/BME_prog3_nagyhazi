@@ -9,7 +9,7 @@ public class MenuBar extends JMenuBar {
 
 	private static final long serialVersionUID = -111659266189879540L;
 
-	public MenuBar(MainFrame fr, view.LoadDialogView.Callback onLoad) {
+	public MenuBar(MainFrame fr, LoadDialogView.Callback onLoad, NewPlayerGameDialog.Callback onNewPlayerGame, NewRobotGameDialog.Callback onNewRobotGame) {
 		// Past games
 		JMenu pastGames = new JMenu("Past games");
 		JMenuItem load = new JMenuItem("Load");
@@ -21,7 +21,12 @@ public class MenuBar extends JMenuBar {
 		JMenuItem vsRobot = new JMenuItem("Player vs Robot");
 		
 		vsPlayer.addActionListener((e) -> {
-			JDialog d = new NewPlayerGameDialog(fr);
+			JDialog d = new NewPlayerGameDialog(fr, onNewPlayerGame);
+			d.setVisible(true);
+		});
+		
+		vsRobot.addActionListener((e) -> {
+			JDialog d = new NewRobotGameDialog(fr, onNewRobotGame);
 			d.setVisible(true);
 		});
 		
