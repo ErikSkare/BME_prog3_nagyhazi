@@ -58,7 +58,6 @@ public class Pawn extends Piece {
 		Field canPromoteFrom = this.getIsWhite() 
 				? b.getFieldAt(1, current.getXCoord())
 				: b.getFieldAt(6, current.getXCoord());
-		Piece promote = b.getPromotionPiece(this);
 		
 		// Forward
 		Field frontOf = b.getFieldAt(current.getYCoord() + mul, current.getXCoord());
@@ -66,6 +65,7 @@ public class Pawn extends Piece {
 			// Promoting
 			Move m = new Move(frontOf, (Callback & Serializable) () -> { this.isFirstMove = false; this.enPassant = false; });
 			if(current == canPromoteFrom) {
+				Piece promote = b.getPromotionPiece(this);
 				m.addEffect(new RemoveEffect(this));
 				m.addEffect(new AddEffect(promote, frontOf));
 			} else
@@ -81,6 +81,7 @@ public class Pawn extends Piece {
 				m.addEffect(new MoveEffect(this, leftCapture));
 				// Promotion
 				if(current == canPromoteFrom) {
+					Piece promote = b.getPromotionPiece(this);
 					m.addEffect(new RemoveEffect(this));
 					m.addEffect(new AddEffect(promote, leftCapture));
 				}
@@ -104,6 +105,7 @@ public class Pawn extends Piece {
 				m.addEffect(new MoveEffect(this, rightCapture));
 				// Promote
 				if(current == canPromoteFrom) {
+					Piece promote = b.getPromotionPiece(this);
 					m.addEffect(new RemoveEffect(this));
 					m.addEffect(new AddEffect(promote, rightCapture));
 				}
