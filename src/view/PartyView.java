@@ -79,6 +79,9 @@ public class PartyView extends JPanel {
 		this.boardView = new BoardView(party.getBoard(), this);
 		this.party.resetChangeListeners();
 		this.party.addChangeListener(() -> {
+			getStateText().setText(party.getPartyState().toString());
+			if(party.getPartyState() != Party.State.ONGOING)
+				disableDrawButton();
 			this.boardView.repaint();
 		});
 		

@@ -148,19 +148,19 @@ public class Party implements Serializable {
 	 * @param by a visszaadó játékos.
 	 */
 	public void returnStepPermission(Player by) {
+		if(this.partyState == Party.State.ONGOING) {
+			boolean isWhiteNext = (by == this.getBlack());
+			Party.State state = this.board.getCurrentState(isWhiteNext);
+			this.partyState = state;
+			if(state == Party.State.ONGOING) {
+				if(isWhiteNext)
+					this.getWhite().grantStepPermission();
+				else
+					this.getBlack().grantStepPermission();
+			}
+		}
 		for(ChangeListener l : changeListeners)
 			l.run();
-		if(this.partyState != Party.State.ONGOING)
-			return;
-		boolean isWhiteNext = (by == this.getBlack());
-		Party.State state = this.board.getCurrentState(isWhiteNext);
-		this.partyState = state;
-		if(state != Party.State.ONGOING)
-			return;
-		if(isWhiteNext)
-			this.getWhite().grantStepPermission();
-		else
-			this.getBlack().grantStepPermission();
 	}
 	
 	/**

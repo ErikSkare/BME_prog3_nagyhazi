@@ -56,7 +56,7 @@ public class BoardView extends JPanel {
 	
 	/**
 	 * @param board			a tábla.
-	 * @param partyView		a parti nézete..
+	 * @param partyView		a parti nézete.
 	 */
 	public BoardView(Board board, PartyView partyView) {
 		super(new GridLayout(0, 8));
