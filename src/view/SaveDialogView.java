@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -70,7 +71,8 @@ public class SaveDialogView extends JDialog {
 			FileOutputStream fout = null;
 			ObjectOutputStream oos = null;;
 			try {
-				fout = new FileOutputStream(field.getText() + ".parti");
+				File from = new File(MainFrame.searchDir, field.getText() + ".parti");
+				fout = new FileOutputStream(from);
 				oos = new ObjectOutputStream(fout);
 				oos.writeObject(party);
 				setVisible(false);

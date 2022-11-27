@@ -5,6 +5,7 @@ import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,6 +17,8 @@ import logic.players.RealPlayer;
 public class MainFrame extends JFrame {
 	
 	private static final long serialVersionUID = 8456560429229699542L;
+	
+	public static File searchDir = new File(".");
 	
 	private PartyView current = null;
 	

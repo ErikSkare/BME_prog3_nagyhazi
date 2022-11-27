@@ -42,8 +42,7 @@ public class LoadDialogView extends JDialog {
 		this.setResizable(false);
 		this.setLocationRelativeTo(fr);
 		
-		File dir = new File(".");
-		File [] files = dir.listFiles(new FilenameFilter() {
+		File [] files = MainFrame.searchDir.listFiles(new FilenameFilter() {
 		    @Override
 		    public boolean accept(File dir, String name) {
 		        return name.endsWith(".parti");
@@ -55,6 +54,8 @@ public class LoadDialogView extends JDialog {
 			combo.addItem(f.getName());
 		
 		submit = new JButton("Load");
+		if(combo.getItemCount() == 0)
+			submit.setEnabled(false);
 		cancel = new JButton("Cancel");
 		
 		submit.addActionListener(new OnLoadRequest());
