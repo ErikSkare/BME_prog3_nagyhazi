@@ -66,7 +66,7 @@ public class NewRobotGameDialog extends JDialog {
 		this.cb = cb;
 		
 		this.setLayout(new FlowLayout());
-		this.setSize(new Dimension(200, 100));
+		this.setSize(new Dimension(250, 80));
 		this.setResizable(false);
 		this.setLocationRelativeTo(fr);
 		

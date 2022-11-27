@@ -61,7 +61,7 @@ public class LoadDialogView extends JDialog {
 		this.cb = cb;
 		
 		this.setLayout(new FlowLayout());
-		this.setSize(new Dimension(300, 100));
+		this.setSize(new Dimension(300, 80));
 		this.setResizable(false);
 		this.setLocationRelativeTo(fr);
 		
