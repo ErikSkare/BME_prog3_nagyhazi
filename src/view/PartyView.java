@@ -93,7 +93,7 @@ public class PartyView extends JPanel {
 		this.drawButton = new JButton("Make draw");
 		this.drawButton.setFocusable(false);
 		this.drawButton.addActionListener(new OnDrawButtonClick());
-		if(this.party.getPartyState() != Party.State.ONGOING)
+		if(this.party.getPartyState() != Party.State.ONGOING || !this.party.getCanMakeDraw())
 			this.drawButton.setEnabled(false);;
 		
 		this.saveButton = new JButton("Save game");

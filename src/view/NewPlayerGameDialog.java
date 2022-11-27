@@ -67,7 +67,7 @@ public class NewPlayerGameDialog extends JDialog {
 		public void actionPerformed(ActionEvent e) {
 			RealPlayer p1 = new RealPlayer(true);
 			RealPlayer p2 = new RealPlayer(false);
-			Party p = new Party(p1, p2);
+			Party p = new Party(p1, p2, true);
 			p1.setPlaying(p);
 			p2.setPlaying(p);
 			p.startMatch();

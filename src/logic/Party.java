@@ -51,6 +51,8 @@ public class Party implements Serializable {
 	 */
 	private List<Piece> blackCapturedPool;
 	
+	private boolean canMakeDraw;
+	
 	/**
 	 * A változásra feliratkozást megvalósító interfész.
 	 */
@@ -71,9 +73,10 @@ public class Party implements Serializable {
 	 * @param p1 első játékos.
 	 * @param p2 második játékos.
 	 */
-	public Party(Player p1, Player p2) {
+	public Party(Player p1, Player p2, boolean canMakeDraw) {
 		this.p1 = p1;
 		this.p2 = p2;
+		this.canMakeDraw = canMakeDraw;
 		this.partyState = Party.State.ONGOING;
 		this.whiteCapturedPool = new ArrayList<Piece>();
 		this.blackCapturedPool = new ArrayList<Piece>();
@@ -182,5 +185,11 @@ public class Party implements Serializable {
 		this.partyState = Party.State.DRAW;
 		this.getCurrentPlayer().resignStepPermission();
 	}
+	
+	/**
+	 * Megadja, hogy a döntetlenné tevés opciója elérhető-e.
+	 * @return Elérhető-e az opció.
+	 */
+	public final boolean getCanMakeDraw() { return this.canMakeDraw; }
 	
 }

@@ -101,7 +101,7 @@ public class NewRobotGameDialog extends JDialog {
 				ap = new RobotPlayer(true);
 				rp = new RealPlayer(false);
 			}
-			Party p = new Party(ap, rp);
+			Party p = new Party(ap, rp, false);
 			ap.setPlaying(p);
 			rp.setPlaying(p);
 			p.startMatch();
