@@ -1,24 +1,21 @@
 package view;
 
-import java.awt.Color;
-import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.Popup;
-import javax.swing.PopupFactory;
-
 import logic.Party;
 
-public class SavePopupView extends JPanel {
+public class SaveDialogView extends JDialog {
 
 	private static final long serialVersionUID = 1167732662903006519L;
 	
@@ -29,10 +26,15 @@ public class SavePopupView extends JPanel {
 	private JButton submit;
 	
 	private JButton close;
-	
-	private Popup popup;
 
-	public SavePopupView(Party party) {
+	public SaveDialogView(JFrame fr, Party party) {
+		super(fr, "Save game");
+		
+		this.setLayout(new FlowLayout());
+		this.setSize(new Dimension(300, 100));
+		this.setResizable(false);
+		this.setLocationRelativeTo(fr);
+		
 		this.party = party;
 		
 		JLabel text = new JLabel("Name");
@@ -48,22 +50,13 @@ public class SavePopupView extends JPanel {
 		this.add(field);
 		this.add(submit);
 		this.add(close);
-		this.setBorder(BorderFactory.createLineBorder(Color.black));
-	}
-	
-	public void launch(Component owner, int x, int y) {
-		if(popup != null)
-			return;
-		popup = PopupFactory.getSharedInstance().getPopup(owner, this, x, y);
-        popup.show();
 	}
 	
 	class OnClose implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			popup.hide();
-			popup = null;
+			setVisible(false);
 		}
 		
 	}
@@ -78,8 +71,7 @@ public class SavePopupView extends JPanel {
 				fout = new FileOutputStream(field.getText() + ".parti");
 				oos = new ObjectOutputStream(fout);
 				oos.writeObject(party);
-				popup.hide();
-				popup = null;
+				setVisible(false);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			} finally {

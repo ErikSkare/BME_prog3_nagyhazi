@@ -1,12 +1,11 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import logic.Board;
@@ -61,13 +60,13 @@ public class PartyView extends JPanel {
 	 */
 	private JComboBox<Promotion> promotionCombo;
 	
-	private SavePopupView savePopup;
+	private SaveDialogView saveDialog;
 	
 	/**
 	 * Konstruktor
 	 * @param party a parti.
 	 */
-	public PartyView(Party party) {
+	public PartyView(JFrame fr, Party party) {
 		super();
 		this.setLayout(new BorderLayout());
 		this.party = party;
@@ -93,7 +92,7 @@ public class PartyView extends JPanel {
 		this.promotionCombo.addActionListener(new ComboAction());
 		this.setPromotion();
 		
-		this.savePopup = new SavePopupView(this.party);
+		this.saveDialog = new SaveDialogView(fr, this.party);
 		
 		this.add(this.boardView, BorderLayout.CENTER);
 		this.add(this.stateText, BorderLayout.NORTH);
@@ -166,12 +165,7 @@ public class PartyView extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			party.getBoard().stepToNow();
 			repaint();
-			Point p = getLocationOnScreen();
-			Dimension inner = savePopup.getPreferredSize();
-			Dimension outer = getPreferredSize();
-			savePopup.launch(PartyView.this, 
-					p.x + (outer.width - inner.width) / 2, 
-					p.y + (outer.height - inner.height) / 2);
+			saveDialog.setVisible(true);
 		}
 		
 	}
