@@ -51,6 +51,9 @@ public class Party implements Serializable {
 	 */
 	private List<Piece> blackCapturedPool;
 	
+	/**
+	 * Döntetlenné tehető-e a parti.
+	 */
 	private boolean canMakeDraw;
 	
 	/**
@@ -72,6 +75,7 @@ public class Party implements Serializable {
 	 * Konstruktor
 	 * @param p1 első játékos.
 	 * @param p2 második játékos.
+	 * @param canMakeDraw döntetlenné tehető-e a parti.
 	 */
 	public Party(Player p1, Player p2, boolean canMakeDraw) {
 		this.p1 = p1;
