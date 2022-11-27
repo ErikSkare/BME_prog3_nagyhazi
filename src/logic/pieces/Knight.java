@@ -10,6 +10,10 @@ import logic.Piece;
 import logic.Move.Callback;
 import logic.effects.MoveEffect;
 
+/**
+ * @author Skáre Erik
+ * Egy ló bábut megvalósító osztály.
+ */
 public class Knight extends Piece {
 
 	private static final long serialVersionUID = -5424546512612778382L;

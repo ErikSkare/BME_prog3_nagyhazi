@@ -7,6 +7,7 @@ import logic.Field;
 import logic.Piece;
 
 public class Utils {
+	
 	public static interface Transition {
 		public Field run(Field f);
 	}
@@ -108,4 +109,5 @@ public class Utils {
 		}
 		return null;
 	}
+	
 }

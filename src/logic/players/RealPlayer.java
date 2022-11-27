@@ -16,7 +16,7 @@ public class RealPlayer extends Player {
 	private boolean canStep;
 
 	/**
-	 * @param playing a parti, amit játszik.
+	 * @param isWhite világossal játszik-e.
 	 */
 	public RealPlayer(boolean isWhite) {
 		super(isWhite);

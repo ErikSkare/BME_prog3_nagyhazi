@@ -56,11 +56,14 @@ public class Party implements Serializable {
 		public void run();
 	}
 	
+	/**
+	 * A változásra feliratkozottak.
+	 */
 	transient private List<ChangeListener> changeListeners;
 	
 	/**
-	 * @param white világos.
-	 * @param black sötét.
+	 * @param p1 első játékos.
+	 * @param p2 második játékos.
 	 */
 	public Party(Player p1, Player p2) {
 		this.p1 = p1;
@@ -88,6 +91,10 @@ public class Party implements Serializable {
 		else return p2;
 	}
 	
+	/**
+	 * Elindítja a partit.
+	 * Azaz megadja a lépési jogot a világosnak.
+	 */
 	public final void startMatch() {
 		getWhite().grantStepPermission();
 	}
@@ -104,10 +111,17 @@ public class Party implements Serializable {
 			return getBlack();
 	}
 	
+	/**
+	 * Feliratkoztatja a listenert a változásra.
+	 * @param l listener
+	 */
 	public final void addChangeListener(ChangeListener l) {
 		this.changeListeners.add(l);
 	}
 	
+	/**
+	 * Törli az aktuálisan feliratkozottakat.
+	 */
 	public final void resetChangeListeners() {
 		this.changeListeners = new ArrayList<ChangeListener>();
 	}

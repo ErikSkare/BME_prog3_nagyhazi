@@ -7,6 +7,10 @@ import logic.Effect;
 import logic.Field;
 import logic.Piece;
 
+/**
+ * @author Skáre Erik
+ * Olyan effekt, amely töröl egy bábut.
+ */
 public class RemoveEffect extends Effect {
 	
 	private static final long serialVersionUID = 4610838995513204908L;
@@ -16,6 +20,9 @@ public class RemoveEffect extends Effect {
 	 */
 	private Field on;
 
+	/**
+	 * @param piece a törlendő bábu.
+	 */
 	public RemoveEffect(Piece piece) {
 		super(piece);
 		this.on = piece.getField();

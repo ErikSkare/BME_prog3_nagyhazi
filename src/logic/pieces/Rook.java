@@ -10,6 +10,10 @@ import logic.Piece;
 import logic.Move.Callback;
 import logic.effects.MoveEffect;
 
+/**
+ * @author Skáre Erik
+ * Egy bástya bábut megvalósító osztály.
+ */
 public class Rook extends Piece {
 
 	private static final long serialVersionUID = 3163567554782674065L;

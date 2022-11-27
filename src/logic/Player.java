@@ -15,10 +15,13 @@ abstract public class Player implements Serializable {
 	 */
 	private Party playing;
 	
+	/**
+	 * A színt jelzi, amelyikkel a játékos játszik.
+	 */
 	private boolean isWhite;
 	
 	/**
-	 * @param playing a parti
+	 * @param isWhite világossal játszik-e.
 	 */
 	public Player(boolean isWhite) {
 		this.playing = null;
@@ -51,6 +54,9 @@ abstract public class Player implements Serializable {
 	 */
 	public final void setPlaying(Party p) { this.playing = p; }
 	
+	/**
+	 * @return Az 'isWhite' attribútum értéke.
+	 */
 	public final boolean getIsWhite() { return this.isWhite; }
 	
 }

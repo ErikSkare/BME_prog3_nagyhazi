@@ -12,6 +12,10 @@ import logic.Piece;
 import logic.Move.Callback;
 import logic.effects.MoveEffect;
 
+/**
+ * @author Skáre Erik
+ * Egy király bábut megvalósító osztály.
+ */
 public class King extends Piece {
 
 	private static final long serialVersionUID = 5801691492923319881L;

@@ -11,16 +11,32 @@ import javax.swing.JPanel;
 
 import logic.Party;
 
+/**
+ * @author Skáre Erik
+ * Az főablak.
+ */
 public class MainFrame extends JFrame {
 	
 	private static final long serialVersionUID = 8456560429229699542L;
 	
+	/**
+	 * A könyvtár, amiben keresi a program a partikat, és ahova menti őket.
+	 */
 	public static File searchDir = new File(".");
 	
+	/**
+	 * Az aktuálisan zajló partihoz tartozó nézet.
+	 */
 	private PartyView current = null;
 	
+	/**
+	 * A különböző állapotokhoz tartozó nézetek megjelenítéséért felelős.
+	 */
 	private CardLayout layout;
 	
+	/**
+	 * A különböző állapotokhoz tartozó nézeteket tartalmazza.
+	 */
 	private JPanel deck;
 
 	public MainFrame() {
@@ -42,6 +58,9 @@ public class MainFrame extends JFrame {
 	    setNoGameState();
 	}
 	
+	/**
+	 * Az állapot, ami azt jelzi, hogy nem zajlik egy játék se.
+	 */
 	private void setNoGameState() {
 		JPanel panel = new JPanel(new BorderLayout());
 		JLabel text = new JLabel("No game loaded!", JLabel.CENTER);

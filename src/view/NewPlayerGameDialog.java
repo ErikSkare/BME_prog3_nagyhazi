@@ -12,16 +12,30 @@ import javax.swing.JLabel;
 import logic.Party;
 import logic.players.RealPlayer;
 
+/**
+ * @author Skáre Erik
+ * A dialógus, ami egy új játékos vs játékos partit hoz létre.
+ */
 public class NewPlayerGameDialog extends JDialog {
 
 	private static final long serialVersionUID = -4412067804663928027L;
 	
+	/**
+	 * Egy callback, ami a parti létrehozása után hívódik meg.
+	 */
 	public interface Callback {
 		public void run(Party p);
 	}
 	
+	/**
+	 * Egy callback példány.
+	 */
 	private Callback cb;
 
+	/**
+	 * @param fr a tartalmazó frame.
+	 * @param cb callback.
+	 */
 	public NewPlayerGameDialog(MainFrame fr, Callback cb) {
 		super(fr, "New Player game");
 		

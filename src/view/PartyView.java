@@ -60,10 +60,14 @@ public class PartyView extends JPanel {
 	 */
 	private JComboBox<Promotion> promotionCombo;
 	
+	/**
+	 * A mentés dialógushoz tartozó nézet.
+	 */
 	private SaveDialogView saveDialog;
 	
 	/**
 	 * Konstruktor
+	 * @param fr a tartalmazó frame.
 	 * @param party a parti.
 	 */
 	public PartyView(JFrame fr, Party party) {

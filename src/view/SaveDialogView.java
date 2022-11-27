@@ -16,18 +16,39 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import logic.Party;
 
+/**
+ * @author Skáre Erik
+ * A dialógus, amely egy parti mentéséért felelős.
+ */
 public class SaveDialogView extends JDialog {
 
 	private static final long serialVersionUID = 1167732662903006519L;
 	
+	/**
+	 * A parti, amit el szeretnénk menteni.
+	 */
 	private Party party;
 	
+	/**
+	 * Az elmentendő parti nevét tartalmazza.
+	 * <fájlnév>.parti
+	 */
 	private JTextField field;
 	
+	/**
+	 * A gomb megnyomására elmentődik a parti.
+	 */
 	private JButton submit;
 	
+	/**
+	 * Bezárja a dialógus ablakot.
+	 */
 	private JButton close;
 
+	/**
+	 * @param fr	a tartalmazó frame.
+	 * @param party	az elmentendő parti.
+	 */
 	public SaveDialogView(JFrame fr, Party party) {
 		super(fr, "Save game");
 		

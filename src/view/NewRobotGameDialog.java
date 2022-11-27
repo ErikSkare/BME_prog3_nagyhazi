@@ -13,27 +13,53 @@ import logic.Party;
 import logic.players.RealPlayer;
 import logic.players.RobotPlayer;
 
+/**
+ * @author Skáre Erik
+ * A dialógus, amivel egy új robot vs játékos partit lehet elindítani.
+ */
 public class NewRobotGameDialog extends JDialog {
 
 	private static final long serialVersionUID = 404747377637798238L;
 	
+	/**
+	 * A színek, amikkel a játékos játszhat.
+	 */
 	enum Playing {
 		WHITE,
 		BLACK
 	}
 	
+	/**
+	 * A parti indítása után hívódó callback.
+	 */
 	public interface Callback {
 		public void run(Party p);
 	}
 	
+	/**
+	 * Egy callback példány.
+	 */
 	private Callback cb;
 	
+	/**
+	 * A játékos a színét választhatja ki vele.
+	 */
 	private JComboBox<Playing> color;
 	
+	/**
+	 * Megerősítő gomb, elindítja a játékot.
+	 */
 	private JButton submit;
 	
+	/**
+	 * Gomb, amellyel be lehet zárni a dialógust.
+	 */
 	private JButton cancel;
 	
+	/**
+	 * @param fr a tartalmazó frame.
+	 * @param cb callback.
+	 */
 	public NewRobotGameDialog(MainFrame fr, Callback cb) {
 		super(fr, "New Robot game");
 		

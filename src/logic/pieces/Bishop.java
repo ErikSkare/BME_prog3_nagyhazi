@@ -10,6 +10,10 @@ import logic.Piece;
 import logic.Move.Callback;
 import logic.effects.MoveEffect;
 
+/**
+ * @author Skáre Erik
+ * Egy futó bábut megvalósító osztály.
+ */
 public class Bishop extends Piece {
 
 	private static final long serialVersionUID = -7746783782119001111L;

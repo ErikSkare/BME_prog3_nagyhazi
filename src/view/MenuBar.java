@@ -5,10 +5,20 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+/**
+ * @author Skáre Erik
+ * Az ablak tetején lévő menüt jeleníti meg.
+ */
 public class MenuBar extends JMenuBar {
 
 	private static final long serialVersionUID = -111659266189879540L;
 
+	/**
+	 * @param fr				a tartalmazó frame.
+	 * @param onLoad			callback, ami egy játék betöltése után hívódik meg.
+	 * @param onNewPlayerGame	callback, ami egy játékos vs játékos parti indításakor hívódik meg.
+	 * @param onNewRobotGame	callback, ami egy robot vs játékos parti indításakor hívódik meg.
+	 */
 	public MenuBar(MainFrame fr, LoadDialogView.Callback onLoad, NewPlayerGameDialog.Callback onNewPlayerGame, NewRobotGameDialog.Callback onNewRobotGame) {
 		// Past games
 		JMenu pastGames = new JMenu("Past games");

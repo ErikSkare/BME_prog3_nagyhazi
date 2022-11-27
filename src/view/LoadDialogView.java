@@ -16,22 +16,45 @@ import javax.swing.JDialog;
 
 import logic.Party;
 
+/**
+ * @author Skáre Erik
+ * Dialógus, amivel játékot lehet betölteni.
+ */
 public class LoadDialogView extends JDialog {
 
 	private static final long serialVersionUID = -4233439167393865912L;
 	
+	/**
+	 * Egy callback, ami a játék betöltése után meghívódik.
+	 */
 	public interface Callback {
 		public void run(Party p);
 	}
 	
+	/**
+	 * A callback egy példánya.
+	 */
 	private Callback cb;
 	
+	/**
+	 * A ComboBox, ami a kiválasztható partikat jeleníti meg.
+	 */
 	private JComboBox<String> combo;
 	
+	/**
+	 * A gomb, amivel betölthető a parti.
+	 */
 	private JButton submit;
 	
+	/**
+	 * A gomb, amivel be lehet zárni a dialógust.
+	 */
 	private JButton cancel;
 	
+	/**
+	 * @param fr a tartalmazó frame.
+	 * @param cb callback.
+	 */
 	public LoadDialogView(MainFrame fr, Callback cb) {
 		super(fr, "Load game");
 		

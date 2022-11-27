@@ -7,6 +7,10 @@ import logic.Effect;
 import logic.Field;
 import logic.Piece;
 
+/**
+ * @author Skáre Erik
+ * Olyan effekt, ami hozzáad egy bábut egy mezőhöz.
+ */
 public class AddEffect extends Effect {
 	
 	private static final long serialVersionUID = -8371555093380855618L;

@@ -97,6 +97,9 @@ public class BoardView extends JPanel {
 	 */
 	public final Piece getActivePiece() { return this.activePiece; }
 	
+	/**
+	 * @return A parti nézete.
+	 */
 	public final PartyView getPartyView() { return this.partyView; }
 	
 	/**
