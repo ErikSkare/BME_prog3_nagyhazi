@@ -7,6 +7,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * @author Skáre Erik
+ */
 public class PawnTest {
 	
 	private Board b;
@@ -19,6 +22,9 @@ public class PawnTest {
 	
 	private List<Piece> blackCapturedPool = new ArrayList<Piece>();
 	
+	/**
+	 * Incializálja a táblát és hozzá egy világos és sötét gyalogot.
+	 */
 	@Before
 	public void init() {
 		this.b = new Board(whiteCapturedPool, blackCapturedPool);
@@ -26,6 +32,9 @@ public class PawnTest {
 		this.bp = b.getFieldAt(1, 3).getPiece();
 	}
 	
+	/**
+	 * Teszteli a kettős lépést.
+	 */
 	@Test
 	public void testDoublePawnMove() {
 		Move m = Utils.findMoveByIndicator(wp, b.getFieldAt(4, 4));
@@ -33,6 +42,9 @@ public class PawnTest {
 		assertEquals(wp.getField(), b.getFieldAt(4, 4));
 	}
 	
+	/**
+	 * Teszteli az előrelépést.
+	 */
 	@Test
 	public void testSinglePawnMove() {
 		Move m = Utils.findMoveByIndicator(wp, b.getFieldAt(5, 4));
@@ -40,6 +52,9 @@ public class PawnTest {
 		assertEquals(wp.getField(), b.getFieldAt(5, 4));
 	}
 	
+	/**
+	 * Teszteli az ütést.
+	 */
 	@Test
 	public void testTake() {
 		wp.makeMove(Utils.findMoveByIndicator(wp, b.getFieldAt(4, 4)));
@@ -47,6 +62,9 @@ public class PawnTest {
 		assertTrue(Utils.hasMoveByIndicator(wp, b.getFieldAt(3, 3)));
 	}
 	
+	/**
+	 * Teszteli, hogy az En Passant lépés működik-e.
+	 */
 	@Test
 	public void testEnPassant() {
 		wp.makeMove(Utils.findMoveByIndicator(wp, b.getFieldAt(4, 4)));

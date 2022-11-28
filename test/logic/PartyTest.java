@@ -7,6 +7,9 @@ import org.junit.Test;
 
 import logic.players.RealPlayer;
 
+/**
+ * @author Skáre Erik
+ */
 public class PartyTest {
 	
 	private Party p;
@@ -15,6 +18,9 @@ public class PartyTest {
 	
 	private RealPlayer bp;
 	
+	/**
+	 * Inicializálja egy partit két játékossal.
+	 */
 	@Before
 	public void init() {
 		this.wp = new RealPlayer(true);
@@ -24,6 +30,9 @@ public class PartyTest {
 		this.bp.setPlaying(p);
 	}
 	
+	/**
+	 * Teszteli a parti kezdeti állapotát.
+	 */
 	@Test
 	public void initialState() {
 		assertFalse(this.wp.hasStepPermission());
@@ -32,6 +41,9 @@ public class PartyTest {
 		assertTrue(this.p.getCanMakeDraw());
 	}
 	
+	/**
+	 * Elindítja a partit és teszteli a lépési jogokat.
+	 */
 	@Test
 	public void startMatch() {
 		this.p.startMatch();
@@ -41,6 +53,9 @@ public class PartyTest {
 		assertTrue(this.p.getIsWhiteCurrent());
 	}
 	
+	/**
+	 * Teszteli a lépési jog visszaadását.
+	 */
 	@Test
 	public void returnStepPermission() {
 		this.p.startMatch();

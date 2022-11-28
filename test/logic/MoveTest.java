@@ -8,6 +8,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * @author Skáre Erik
+ */
 public class MoveTest {
 	
 	private Board b;
@@ -18,12 +21,18 @@ public class MoveTest {
 	
 	private List<Piece> blackCapturedPool = new ArrayList<Piece>();
 	
+	/**
+	 * Incializálja a táblát és egy világos gyalogot.
+	 */
 	@Before
 	public void init() {
 		this.b = new Board(whiteCapturedPool, blackCapturedPool);
 		this.wp = b.getFieldAt(6, 4).getPiece();
 	}
 	
+	/**
+	 * Leteszteli a Move.execute() metódust.
+	 */
 	@Test
 	public void testExecute() {
 		Move m = Utils.findMoveByIndicator(wp, b.getFieldAt(4, 4));
@@ -33,6 +42,9 @@ public class MoveTest {
 		assertTrue(wp.canTakeEnPassant());
 	}
 	
+	/**
+	 * Leteszteli a Move.executeWithoutCallback() metódust.
+	 */
 	@Test
 	public void testExecuteWithoutCallback() {
 		Move m = Utils.findMoveByIndicator(wp, b.getFieldAt(4, 4));
@@ -42,6 +54,10 @@ public class MoveTest {
 		assertFalse(wp.canTakeEnPassant());
 	}
 	
+	/**
+	 * Leteszteli a Move.executeReverse() metódust.
+	 * execute() --> executeReverse() --> kezdeti pozíció.
+	 */
 	@Test
 	public void testExecuteReverse() {
 		Move m = Utils.findMoveByIndicator(wp, b.getFieldAt(4, 4));

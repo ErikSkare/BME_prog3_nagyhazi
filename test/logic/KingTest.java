@@ -10,6 +10,9 @@ import org.junit.Test;
 
 import logic.pieces.King;
 
+/**
+ * @author Skáre Erik
+ */
 public class KingTest {
 	
 	private Board b;
@@ -20,17 +23,27 @@ public class KingTest {
 	
 	private List<Piece> blackCapturedPool = new ArrayList<Piece>();
 	
+	/**
+	 * Inicializálja a táblát és a világos királyát.
+	 */
 	@Before
 	public void init() {
 		this.b = new Board(whiteCapturedPool, blackCapturedPool);
 		this.wk = b.getKing(true);
 	}
 	
+	/**
+	 * Leteszteli, hogy kezdetben nincs-e sakkban a király.
+	 */
 	@Test
 	public void testInitialCheck() {
 		assertFalse(wk.isInCheck());
 	}
 	
+	/**
+	 * Úgy mozgatja a bábukat, hogy a világos királya sakkmattban legyen.
+	 * Ezt teszteli.
+	 */
 	@Test
 	public void testCheckmate() {
 		Piece bq = b.getFieldAt(0, 3).getPiece();
