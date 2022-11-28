@@ -144,10 +144,10 @@ public class PartyView extends JPanel {
 			b.setPromotion((p) -> new Knight(null, p.getIsWhite(), 3, p.getCapturedPool()));
 			break;
 		case ROOK:
-			b.setPromotion((p) -> new Rook(null, p.getIsWhite(), 3, p.getCapturedPool()));
+			b.setPromotion((p) -> new Rook(null, p.getIsWhite(), 5, p.getCapturedPool()));
 			break;
 		case QUEEN:
-			b.setPromotion((p) -> new Queen(null, p.getIsWhite(), 3, p.getCapturedPool()));
+			b.setPromotion((p) -> new Queen(null, p.getIsWhite(), 9, p.getCapturedPool()));
 			break;
 		default:
 			break;

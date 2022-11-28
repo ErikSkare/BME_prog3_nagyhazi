@@ -9,6 +9,10 @@ import logic.Field;
 import logic.Move;
 import logic.Piece;
 import logic.Player;
+import logic.pieces.Bishop;
+import logic.pieces.Knight;
+import logic.pieces.Queen;
+import logic.pieces.Rook;
 
 /**
  * @author Skáre Erik
@@ -66,6 +70,16 @@ public class RobotPlayer extends Player {
 	public void grantStepPermission() {
 		Board b = this.getPlaying().getBoard();
 		
+		Board.Promotion save = b.getPromotion();
+		
+		Board.Promotion[] promotions = new Board.Promotion[4];
+		promotions[0] = (p) -> new Bishop(null, p.getIsWhite(), 3, p.getCapturedPool());
+		promotions[1] = (p) -> new Knight(null, p.getIsWhite(), 3, p.getCapturedPool());
+		promotions[2] = (p) -> new Rook(null, p.getIsWhite(), 5, p.getCapturedPool());
+		promotions[3] = (p) -> new Queen(null, p.getIsWhite(), 9, p.getCapturedPool());
+		int rndProm = new Random().nextInt(4);
+		b.setPromotion(promotions[rndProm]);
+		
 		ArrayList<PieceMove> moves = new ArrayList<PieceMove>();
 		for(int i = 0; i < 8; ++i) {
 			for(int j = 0; j < 8; ++j) {
@@ -77,6 +91,8 @@ public class RobotPlayer extends Player {
 				}
 			}
 		}
+		
+		b.setPromotion(save);
 		
 		int rnd = new Random().nextInt(moves.size());
 		moves.get(rnd).getPiece().makeMove(moves.get(rnd).getMove());
