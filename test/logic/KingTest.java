@@ -11,6 +11,7 @@ import org.junit.Test;
 import logic.pieces.King;
 
 /**
+ * A király bábut teszteli.
  * @author Skáre Erik
  */
 public class KingTest {

@@ -8,6 +8,7 @@ import org.junit.Test;
 import logic.players.RealPlayer;
 
 /**
+ * A parti bizonyos metódusait teszteli.
  * @author Skáre Erik
  */
 public class PartyTest {

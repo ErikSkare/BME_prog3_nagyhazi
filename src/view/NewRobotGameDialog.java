@@ -14,6 +14,7 @@ import logic.players.RealPlayer;
 import logic.players.RobotPlayer;
 
 /**
+ * Új játékos vs robot partit létrehozó dialógus.
  * @author Skáre Erik
  */
 public class NewRobotGameDialog extends JDialog {

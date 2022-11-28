@@ -3,6 +3,7 @@ package logic;
 import java.io.Serializable;
 
 /**
+ * Egy általános játékos.
  * @author Skáre Erik
  */
 abstract public class Player implements Serializable {

@@ -3,6 +3,7 @@ package logic;
 import java.util.stream.Collectors;
 
 /**
+ * A logikai tesztek által használt közös metódusok.
  * @author Skáre Erik
  */
 public class Utils {

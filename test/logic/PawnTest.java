@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
+ * A gyalog lépéseit teszteli.
  * @author Skáre Erik
  */
 public class PawnTest {

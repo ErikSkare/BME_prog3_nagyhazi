@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import logic.Party;
 
 /**
+ * Egy adott parti mentését lebonyolító dialógus.
  * @author Skáre Erik
  */
 public class SaveDialogView extends JDialog {

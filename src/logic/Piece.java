@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Egy általános bábu.
  * @author Skáre Erik
  */
 abstract public class Piece implements Serializable {

@@ -11,6 +11,7 @@ import logic.Move.Callback;
 import logic.effects.MoveEffect;
 
 /**
+ * Futót megvalósító osztály.
  * @author Skáre Erik
  */
 public class Bishop extends Piece {

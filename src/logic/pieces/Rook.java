@@ -11,6 +11,7 @@ import logic.Move.Callback;
 import logic.effects.MoveEffect;
 
 /**
+ * Bástyát megvalósító osztály.
  * @author Skáre Erik
  */
 public class Rook extends Piece {

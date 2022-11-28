@@ -13,6 +13,7 @@ import logic.Move.Callback;
 import logic.effects.MoveEffect;
 
 /**
+ * Királyt megvalósító osztály.
  * @author Skáre Erik
  */
 public class King extends Piece {

@@ -3,6 +3,7 @@ package logic;
 import java.io.Serializable;
 
 /**
+ * Egy mezőt megvalósító osztály.
  * @author Skáre Erik
  */
 public class Field implements Serializable {

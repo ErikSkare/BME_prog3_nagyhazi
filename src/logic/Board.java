@@ -16,6 +16,7 @@ import logic.pieces.Queen;
 import logic.pieces.Rook;
 
 /**
+ * A táblát megvalósító osztály.
  * @author Skáre Erik
  */
 public class Board implements Serializable {

@@ -8,6 +8,7 @@ import logic.Field;
 import logic.Piece;
 
 /**
+ * Effekt, amely lerak egy bábut a táblára.
  * @author Skáre Erik
  */
 public class AddEffect extends Effect {

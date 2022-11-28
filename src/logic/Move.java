@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Egy lépést megvalósító osztály.
  * @author Skáre Erik
  */
 public class Move implements Serializable {

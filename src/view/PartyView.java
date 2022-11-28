@@ -16,6 +16,7 @@ import logic.pieces.Queen;
 import logic.pieces.Rook;
 
 /**
+ * Egy partihoz tartozó nézet.
  * @author Skáre Erik
  */
 public class PartyView extends JPanel {

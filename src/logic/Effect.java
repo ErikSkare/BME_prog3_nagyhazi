@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * Valamit csinál a táblán egy bábuval.
  * @author Skáre Erik
  */
 abstract public class Effect implements Serializable {

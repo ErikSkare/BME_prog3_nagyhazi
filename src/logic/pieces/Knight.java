@@ -11,6 +11,7 @@ import logic.Move.Callback;
 import logic.effects.MoveEffect;
 
 /**
+ * Lovat megvalósító osztály.
  * @author Skáre Erik
  */
 public class Knight extends Piece {

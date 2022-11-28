@@ -13,6 +13,7 @@ import logic.Piece;
 import logic.Player;
 
 /**
+ * A táblához tartozó nézet.
  * @author Skáre Erik
  */
 public class BoardView extends JPanel {

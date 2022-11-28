@@ -17,6 +17,7 @@ import javax.swing.JDialog;
 import logic.Party;
 
 /**
+ * A parti betöltési dialógus.
  * @author Skáre Erik
  */
 public class LoadDialogView extends JDialog {

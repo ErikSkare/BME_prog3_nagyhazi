@@ -8,6 +8,7 @@ import logic.Field;
 import logic.Piece;
 
 /**
+ * Effekt, amely mozgat egy bábut a táblán.
  * @author Skáre Erik
  */
 public class MoveEffect extends Effect {

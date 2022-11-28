@@ -11,6 +11,7 @@ import logic.Move.Callback;
 import logic.effects.MoveEffect;
 
 /**
+ * Királynőt megvalósító osztály.
  * @author Skáre Erik
  */
 public class Queen extends Piece {

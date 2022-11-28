@@ -6,6 +6,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 /**
+ * Az ablak tetején lévő menü.
  * @author Skáre Erik
  */
 public class MenuBar extends JMenuBar {

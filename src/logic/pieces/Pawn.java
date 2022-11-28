@@ -14,6 +14,7 @@ import logic.effects.MoveEffect;
 import logic.effects.RemoveEffect;
 
 /**
+ * Gyalogot megvalósító osztály.
  * @author Skáre Erik
  */
 public class Pawn extends Piece {

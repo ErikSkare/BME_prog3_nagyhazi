@@ -3,6 +3,7 @@ package logic.players;
 import logic.Player;
 
 /**
+ * Egy valódi játékost megvalósító osztály.
  * @author Skáre Erik
  */
 public class RealPlayer extends Player {

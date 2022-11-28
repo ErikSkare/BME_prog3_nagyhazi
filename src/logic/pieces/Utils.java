@@ -7,6 +7,7 @@ import logic.Field;
 import logic.Piece;
 
 /**
+ * A bábuk által használt közös metódusok.
  * @author Skáre Erik
  */
 public class Utils {

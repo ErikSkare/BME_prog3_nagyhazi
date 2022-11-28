@@ -15,6 +15,7 @@ import logic.pieces.Queen;
 import logic.pieces.Rook;
 
 /**
+ * Egy robot játékost megvalósító osztály.
  * @author Skáre Erik
  */
 public class RobotPlayer extends Player {

@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
+ * A lépés metódusait teszteli.
  * @author Skáre Erik
  */
 public class MoveTest {

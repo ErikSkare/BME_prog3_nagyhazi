@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
+ * A tábla bizonyos metódusait teszteli.
  * @author Skáre Erik
  */
 public class BoardTest {

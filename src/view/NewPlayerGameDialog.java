@@ -13,6 +13,7 @@ import logic.Party;
 import logic.players.RealPlayer;
 
 /**
+ * Új játékos vs játékos partit létrehozó dialógus.
  * @author Skáre Erik
  */
 public class NewPlayerGameDialog extends JDialog {

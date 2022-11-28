@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import logic.Party;
 
 /**
+ * A főképernyő.
  * @author Skáre Erik
  */
 public class MainFrame extends JFrame {

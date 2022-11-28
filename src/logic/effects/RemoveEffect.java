@@ -8,6 +8,7 @@ import logic.Field;
 import logic.Piece;
 
 /**
+ * Effekt, amely kitöröl egy bábut a tábláról.
  * @author Skáre Erik
  */
 public class RemoveEffect extends Effect {

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * A parti egy táblával és két játékossal.
  * @author Skáre Erik
  */
 public class Party implements Serializable {

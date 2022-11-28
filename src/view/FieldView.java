@@ -16,6 +16,7 @@ import logic.Field;
 import logic.Move;
 
 /**
+ * A mezőhöz tartozó nézet.
  * @author Skáre Erik
  */
 public class FieldView extends JPanel {
